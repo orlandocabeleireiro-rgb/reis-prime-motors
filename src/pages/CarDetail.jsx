@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { getCarById } from "../data/cars.js";
 import CarImage from "../components/CarImage.jsx";
+import SpecIcon from "../components/SpecIcon.jsx";
 
 const SPEC_ROWS = (car) => [
   ["Marca", car.marca],
@@ -67,18 +68,44 @@ export default function CarDetail() {
           </div>
 
           <div className="mt-10">
-            <h2 className="font-head text-xl font-medium text-paper-text">Destaques</h2>
-            <ul className="mt-3 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
+            <h2 className="flex items-center gap-2 font-head text-xl font-medium text-paper-text">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-5 w-5 text-silver"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <path d="m8 12.5 2.5 2.5L16 9.5" />
+              </svg>
+              Destaques
+            </h2>
+            <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {car.destaques.map((item) => (
-                <li
+                <div
                   key={item}
-                  className="flex items-start gap-2 font-sans text-[14px] text-paper-muted"
+                  className="flex items-center gap-2.5 border border-paper-line bg-white px-3.5 py-3 font-sans text-[13px] text-paper-text"
                 >
-                  <span className="mt-2 h-1 w-1 flex-shrink-0 bg-silver" />
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-4 w-4 flex-shrink-0 text-silver"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12.5 9.5 17 19 7" />
+                  </svg>
                   {item}
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
 
@@ -114,9 +141,12 @@ export default function CarDetail() {
             {SPEC_ROWS(car).map(([label, val]) => (
               <div
                 key={label}
-                className="flex justify-between border-t border-line py-3 font-sans"
+                className="flex items-center justify-between border-t border-line py-3 font-sans"
               >
-                <span className="text-sm text-muted">{label}</span>
+                <span className="flex items-center gap-2.5 text-sm text-muted">
+                  <SpecIcon label={label} car={car} />
+                  {label}
+                </span>
                 <span className="text-sm text-cream">{val}</span>
               </div>
             ))}
