@@ -470,6 +470,29 @@ export const CARS = [
       "Modo de condução Cupra",
     ],
   },
+  {
+    id: 22,
+    marca: "Mercedes-Benz",
+    modelo: "E 300 de",
+    ano: 2021,
+    km: 35000,
+    preco: 42900,
+    combustivel: "Híbrido (Diesel)",
+    transmissao: "Automática",
+    cor: "Prateado Iridium",
+    portas: 4,
+    potencia: 306,
+    consumo: "1,7 l/100km (+ 25 km em modo elétrico)",
+    descricao:
+      "Mercedes-Benz E 300 de, híbrido plug-in a gasóleo que junta a eficiência do elétrico em cidade com a autonomia do diesel em viagem. Conforto e tecnologia ao nível do que é esperado da Classe E.",
+    destaques: [
+      "Híbrido plug-in a gasóleo (motor + elétrico)",
+      "Até 25 km só em modo elétrico",
+      "Suspensão pneumática AIRMATIC",
+      "MBUX com ecrã duplo",
+      "Carregamento em tomada doméstica ou wallbox",
+    ],
+  },
 ];
 
 export function getCarById(id) {
