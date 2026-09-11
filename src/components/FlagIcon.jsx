@@ -5,6 +5,7 @@ const FILES = {
   PT: "/flags/pt.svg",
   ES: "/flags/es.svg",
   GB: "/flags/gb.svg",
+  FR: "/flags/fr.svg",
 };
 
 export default function FlagIcon({ code, className = "h-6 w-6" }) {

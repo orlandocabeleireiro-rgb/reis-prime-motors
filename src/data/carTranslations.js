@@ -1,6 +1,6 @@
 // Traduções de conteúdo (descrição + destaques) de cada viatura, para
-// espanhol e inglês. A chave é o id do carro em cars.js. O português
-// continua a viver em cars.js e serve de base/fallback.
+// espanhol, inglês e francês. A chave é o id do carro em cars.js. O
+// português continua a viver em cars.js e serve de base/fallback.
 const TRANSLATIONS = {
   1: {
     es: {
@@ -27,6 +27,18 @@ const TRANSLATIONS = {
         "Front and rear parking sensors",
       ],
     },
+    fr: {
+      descricao:
+        "BMW Série 3 320d en excellent état, révisions à jour et historique complet. Équipée d'un pack sport, de jantes en alliage léger et d'un intérieur en cuir.",
+      destaques: [
+        "Un seul propriétaire",
+        "Historique d'entretien complet",
+        'Jantes en alliage léger 18"',
+        "Intérieur en cuir",
+        "Navigation GPS",
+        "Capteurs de stationnement avant et arrière",
+      ],
+    },
   },
   2: {
     es: {
@@ -48,6 +60,17 @@ const TRANSLATIONS = {
         "High-performance LED headlights",
         "Reversing camera",
         "Dual-zone automatic climate control",
+        "Apple CarPlay / Android Auto",
+      ],
+    },
+    fr: {
+      descricao:
+        "Mercedes-Benz Classe A élégante et économique, idéale pour la ville et les longs trajets. Intérieur numérique avec le système MBUX et assistant de conduite.",
+      destaques: [
+        "Système multimédia MBUX",
+        "Phares LED haute performance",
+        "Caméra de recul",
+        "Climatisation automatique bizone",
         "Apple CarPlay / Android Auto",
       ],
     },
@@ -75,6 +98,17 @@ const TRANSLATIONS = {
         "Front and rear sensors + camera",
       ],
     },
+    fr: {
+      descricao:
+        "Audi A4 Avant avec un kilométrage très faible, pratiquement comme neuve. Carrosserie break avec un grand coffre, idéale pour ceux qui recherchent espace et confort.",
+      destaques: [
+        "Faible kilométrage",
+        "Encore sous garantie constructeur",
+        "Virtual Cockpit numérique",
+        "Sièges chauffants",
+        "Capteurs avant et arrière + caméra",
+      ],
+    },
   },
   4: {
     es: {
@@ -97,6 +131,16 @@ const TRANSLATIONS = {
         "Alloy wheels",
       ],
     },
+    fr: {
+      descricao:
+        "Volkswagen Golf, l'un des modèles les plus fiables et recherchés du marché. Moteur essence efficace, idéal pour un usage quotidien.",
+      destaques: [
+        "Écran tactile de 8 pouces",
+        "Capteur de pluie et feux automatiques",
+        "Régulateur de vitesse adaptatif",
+        "Jantes en alliage léger",
+      ],
+    },
   },
   5: {
     es: {
@@ -117,6 +161,16 @@ const TRANSLATIONS = {
         "Still under factory warranty",
         "Easy Link multimedia screen",
         "Rear parking sensors",
+      ],
+    },
+    fr: {
+      descricao:
+        "Renault Clio pratiquement neuve, avec un kilométrage très réduit. Excellente option comme première voiture ou pour un usage urbain.",
+      destaques: [
+        "Quasiment neuve — 8 000 km",
+        "Encore sous garantie constructeur",
+        "Écran multimédia Easy Link",
+        "Capteurs de stationnement arrière",
       ],
     },
   },
@@ -143,6 +197,17 @@ const TRANSLATIONS = {
         "Lane keep assist",
       ],
     },
+    fr: {
+      descricao:
+        "Peugeot 3008, SUV spacieux et confortable, avec l'i-Cockpit primé. Excellente option pour les familles qui recherchent plus d'espace sans renoncer au confort.",
+      destaques: [
+        "SUV avec un bon espace intérieur",
+        "i-Cockpit numérique",
+        "Caméra de recul à 180°",
+        "Toit panoramique",
+        "Assistant de maintien dans la voie",
+      ],
+    },
   },
   7: {
     es: {
@@ -165,6 +230,17 @@ const TRANSLATIONS = {
         '15" central touchscreen',
         "Supercharger fast charging",
         "Automatic software updates",
+      ],
+    },
+    fr: {
+      descricao:
+        "Tesla Model 3 avec transmission intégrale et grande autonomie. Pilote automatique de série, mises à jour Over-The-Air et accès au réseau de chargeurs Supercharger.",
+      destaques: [
+        "Transmission intégrale (double moteur)",
+        "Pilote automatique inclus",
+        "Écran central de 15 pouces",
+        "Charge rapide Supercharger",
+        "Mises à jour logicielles automatiques",
       ],
     },
   },
@@ -191,6 +267,17 @@ const TRANSLATIONS = {
         "PASM adaptive suspension",
       ],
     },
+    fr: {
+      descricao:
+        "Porsche 911 Carrera, une icône sportive entretenue avec le plus grand soin. Révisions toujours effectuées chez un concessionnaire officiel, sans antécédent d'accident.",
+      destaques: [
+        "Historique 100% chez un concessionnaire officiel",
+        "Sièges sport en cuir",
+        "Système d'échappement sport",
+        "Jantes exclusives Porsche",
+        "Suspension adaptative PASM",
+      ],
+    },
   },
   9: {
     es: {
@@ -211,6 +298,16 @@ const TRANSLATIONS = {
         "Ford SYNC with Apple CarPlay/Android Auto",
         "Rear parking sensors",
         "Cruise control",
+      ],
+    },
+    fr: {
+      descricao:
+        "Ford Focus, un équilibre entre confort et économie, avec un moteur 1.0 EcoBoost efficace. Excellente option pour une conduite quotidienne en ville et sur autoroute.",
+      destaques: [
+        "Moteur EcoBoost primé à l'international",
+        "Ford SYNC avec Apple CarPlay/Android Auto",
+        "Capteurs de stationnement arrière",
+        "Régulateur de vitesse",
       ],
     },
   },
@@ -235,6 +332,16 @@ const TRANSLATIONS = {
         "Extended hybrid battery warranty",
       ],
     },
+    fr: {
+      descricao:
+        "Toyota Corolla Hybride, fiabilité légendaire et consommation très réduite en ville. Idéale pour ceux qui recherchent de faibles coûts d'entretien à long terme.",
+      destaques: [
+        "Technologie hybride Toyota éprouvée",
+        "Toyota Safety Sense (assistants de conduite)",
+        "Consommation en ville très faible",
+        "Garantie étendue de la batterie hybride",
+      ],
+    },
   },
   11: {
     es: {
@@ -255,6 +362,16 @@ const TRANSLATIONS = {
         "Mild-hybrid system",
         "Very easy to park",
         "Automatic air conditioning",
+      ],
+    },
+    fr: {
+      descricao:
+        "Fiat 500 au style incomparable, idéale pour la ville. Kilométrage très faible et consommation réduite grâce au système mild-hybrid.",
+      destaques: [
+        "Design italien iconique",
+        "Système mild-hybrid",
+        "Très facile à garer",
+        "Climatisation automatique",
       ],
     },
   },
@@ -279,6 +396,16 @@ const TRANSLATIONS = {
         "Multimedia screen with navigation",
       ],
     },
+    fr: {
+      descricao:
+        "Nissan Qashqai, l'un des SUV compacts les plus vendus en Europe. Espace, visibilité et confort pour toute la famille.",
+      destaques: [
+        "ProPILOT (assistant de conduite semi-autonome)",
+        "Caméra à 360°",
+        "Hayon électrique",
+        "Écran multimédia avec navigation",
+      ],
+    },
   },
   13: {
     es: {
@@ -299,6 +426,16 @@ const TRANSLATIONS = {
         "Fully digital instrument cluster",
         "Heated and ventilated seats",
         "Lane keep assist",
+      ],
+    },
+    fr: {
+      descricao:
+        "Kia Sportage au design moderne et à l'espace intérieur généreux. Bénéficie encore de la garantie constructeur Kia, l'une des plus longues du marché.",
+      destaques: [
+        "Encore couvert par la garantie constructeur Kia",
+        "Tableau de bord entièrement numérique",
+        "Sièges chauffants et ventilés",
+        "Assistant de maintien dans la voie",
       ],
     },
   },
@@ -323,6 +460,16 @@ const TRANSLATIONS = {
         "Rear parking sensors",
       ],
     },
+    fr: {
+      descricao:
+        "Citroën C3 compacte et confortable, avec une suspension à Amortisseurs à Butée Hydraulique Progressive pour plus de confort sur route irrégulière.",
+      destaques: [
+        "Suspension Progressive Hydraulic Cushions",
+        "Sièges Advanced Comfort",
+        "Écran tactile de 7 pouces",
+        "Capteurs de stationnement arrière",
+      ],
+    },
   },
   15: {
     es: {
@@ -343,6 +490,16 @@ const TRANSLATIONS = {
         "Extended battery warranty",
         "Premium interior with exclusive details",
         "DC fast charging",
+      ],
+    },
+    fr: {
+      descricao:
+        "BYD Atto 3, SUV électrique avec une bonne autonomie et un intérieur très bien équipé. Garantie constructeur étendue sur la batterie.",
+      destaques: [
+        "Autonomie supérieure à 400 km",
+        "Garantie de batterie étendue",
+        "Intérieur premium avec finitions exclusives",
+        "Charge rapide DC",
       ],
     },
   },
@@ -367,6 +524,16 @@ const TRANSLATIONS = {
         "Panoramic sunroof",
       ],
     },
+    fr: {
+      descricao:
+        "Volvo XC60, une référence en matière de sécurité et de confort. Intérieur scandinave de grande qualité et système mild-hybrid pour plus d'efficacité.",
+      destaques: [
+        "Pack de sécurité Volvo complet",
+        "Sièges en cuir chauffants",
+        "Système audio Harman Kardon",
+        "Toit panoramique",
+      ],
+    },
   },
   17: {
     es: {
@@ -387,6 +554,16 @@ const TRANSLATIONS = {
         "Native Android Automotive with Google built in",
         "Vegan WeaveTech seats",
         "Öhlins sport suspension (adjustable)",
+      ],
+    },
+    fr: {
+      descricao:
+        "Polestar 2, véhicule électrique haute performance à transmission intégrale et finition minimaliste scandinave. Système d'infodivertissement Android natif.",
+      destaques: [
+        "Transmission intégrale à double moteur",
+        "Android Automotive natif avec Google intégré",
+        "Sièges vegan en WeaveTech",
+        "Suspension sport Öhlins (réglable)",
       ],
     },
   },
@@ -411,6 +588,16 @@ const TRANSLATIONS = {
         "Multimedia screen with Apple CarPlay",
       ],
     },
+    fr: {
+      descricao:
+        "Mini Cooper S, style britannique incomparable avec une conduite agile et amusante. Faible kilométrage et très bien équipée.",
+      destaques: [
+        "Moteur 2.0 turbo de 178 ch",
+        "Jantes exclusives de 17 pouces",
+        "Toit contrasté",
+        "Écran multimédia avec Apple CarPlay",
+      ],
+    },
   },
   19: {
     es: {
@@ -431,6 +618,16 @@ const TRANSLATIONS = {
         "Meridian sound system",
         "Intelligent all-wheel drive",
         "Front and rear heated seats",
+      ],
+    },
+    fr: {
+      descricao:
+        "Jaguar F-Pace, SUV sportif avec l'ADN de conduite typique de la marque britannique. Intérieur en cuir et finitions de grande qualité.",
+      destaques: [
+        "Intérieur en cuir premium",
+        "Système audio Meridian",
+        "Transmission intégrale intelligente",
+        "Sièges chauffants avant et arrière",
       ],
     },
   },
@@ -455,6 +652,16 @@ const TRANSLATIONS = {
         "Track driving mode",
       ],
     },
+    fr: {
+      descricao:
+        "Ford Mustang GT avec l'emblématique moteur V8 5.0 atmosphérique. Un classique américain moderne, entretenu avec le plus grand soin.",
+      destaques: [
+        "Moteur V8 5.0 atmosphérique",
+        "Échappement sport actif",
+        "Sièges Recaro en cuir",
+        "Mode de conduite Track",
+      ],
+    },
   },
   21: {
     es: {
@@ -475,6 +682,16 @@ const TRANSLATIONS = {
         "Brembo brakes",
         "Dinamica sport seats",
         "Cupra driving mode",
+      ],
+    },
+    fr: {
+      descricao:
+        "Cupra Formentor VZ, SUV coupé sportif au caractère unique. Transmission intégrale et freins Brembo pour une conduite très engageante.",
+      destaques: [
+        "Transmission intégrale 4Drive",
+        "Freins Brembo",
+        "Sièges sport en Dinamica",
+        "Mode de conduite Cupra",
       ],
     },
   },
@@ -501,6 +718,17 @@ const TRANSLATIONS = {
         "Charging via home socket or wallbox",
       ],
     },
+    fr: {
+      descricao:
+        "Mercedes-Benz E 300 de, hybride rechargeable diesel qui allie l'efficacité de l'électrique en ville à l'autonomie du diesel sur route. Confort et technologie au niveau attendu de la Classe E.",
+      destaques: [
+        "Hybride rechargeable diesel (moteur + électrique)",
+        "Jusqu'à 25 km en mode 100% électrique",
+        "Suspension pneumatique AIRMATIC",
+        "MBUX avec double écran",
+        "Charge sur prise domestique ou wallbox",
+      ],
+    },
   },
   25: {
     es: {
@@ -521,6 +749,16 @@ const TRANSLATIONS = {
         "MBUX with large display",
         "Multibeam LED headlights",
         "Heated front seats",
+      ],
+    },
+    fr: {
+      descricao:
+        "Mercedes-Benz Classe C 220d avec le pack AMG Line, élégante et sportive. Excellent équilibre entre confort, technologie et consommation.",
+      destaques: [
+        "Pack extérieur et intérieur AMG Line",
+        "MBUX avec grand écran",
+        "Phares Multibeam LED",
+        "Sièges avant chauffants",
       ],
     },
   },
@@ -545,6 +783,16 @@ const TRANSLATIONS = {
         "Porsche Communication Management",
       ],
     },
+    fr: {
+      descricao:
+        "Porsche Taycan 4S, la sportive 100% électrique de Porsche. Pratiquement neuve, elle allie l'accélération instantanée d'une électrique à l'ADN de conduite Porsche.",
+      destaques: [
+        "Transmission intégrale à double moteur",
+        "Architecture 800V — charge ultra-rapide",
+        "Suspension pneumatique adaptative",
+        "Porsche Communication Management",
+      ],
+    },
   },
   28: {
     es: {
@@ -565,6 +813,16 @@ const TRANSLATIONS = {
         "PASM sport suspension",
         "Perforated disc brakes",
         "Leather sport seats",
+      ],
+    },
+    fr: {
+      descricao:
+        "Porsche 911 Carrera 4S, pratiquement neuve, à transmission intégrale. L'icône sportive de Porsche dans sa version la plus équilibrée entre performance et usage quotidien.",
+      destaques: [
+        "Transmission intégrale (Carrera 4)",
+        "Suspension sport PASM",
+        "Freins à disques perforés",
+        "Sièges sport en cuir",
       ],
     },
   },
