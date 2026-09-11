@@ -1,6 +1,8 @@
 import BrandIcon from "./BrandIcon.jsx";
 import SelectField from "./SelectField.jsx";
 import PriceField from "./PriceField.jsx";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
+import { COMBUSTIVEL_MAP, translateVocab } from "../data/vocab.js";
 
 export default function CarSearch({
   marcas,
@@ -18,6 +20,8 @@ export default function CarSearch({
   resultCount,
   onSearch,
 }) {
+  const { t, lang } = useLanguage();
+
   return (
     <div className="border border-paper-line bg-white p-6 sm:p-8">
       {/* Marcas — fila a deslizar sozinha; clicar filtra e vai aos resultados */}
@@ -45,39 +49,42 @@ export default function CarSearch({
 
       <div className="mt-7 border-t border-paper-line pt-7">
         <div className="mb-4 font-head text-lg font-medium tracking-wide text-paper-text">
-          Pesquisa de viaturas
+          {t("home.pesquisa")}
         </div>
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:flex-wrap">
           <SelectField
-            label="Marca"
+            label={t("home.marca")}
             value={marca}
             onChange={(e) => onSelectMarca(e.target.value, { scroll: false })}
             options={[
-              { value: "Todas", label: "Todas as marcas" },
+              { value: "Todas", label: t("home.todasMarcas") },
               ...marcas.map((m) => ({ value: m, label: m })),
             ]}
           />
           <SelectField
-            label="Modelo"
+            label={t("home.modelo")}
             value={modelo}
             onChange={(e) => setModelo(e.target.value)}
             options={[
-              { value: "Todos", label: "Todos os modelos" },
+              { value: "Todos", label: t("home.todosModelos") },
               ...modelos.map((m) => ({ value: m, label: m })),
             ]}
           />
           <SelectField
-            label="Combustível"
+            label={t("home.combustivel")}
             value={combustivel}
             onChange={(e) => setCombustivel(e.target.value)}
             options={[
-              { value: "Todos", label: "Todos os combustíveis" },
-              ...combustiveis.map((c) => ({ value: c, label: c })),
+              { value: "Todos", label: t("home.todosCombustiveis") },
+              ...combustiveis.map((c) => ({
+                value: c,
+                label: translateVocab(COMBUSTIVEL_MAP, c, lang),
+              })),
             ]}
           />
           <PriceField
-            label="Preço máximo"
+            label={t("home.precoMax")}
             value={precoMax}
             options={precoOpcoes}
             onChange={(e) => {
@@ -102,7 +109,7 @@ export default function CarSearch({
               <circle cx="11" cy="11" r="7" />
               <path d="m21 21-4.3-4.3" />
             </svg>
-            Pesquisar ({resultCount})
+            {t("home.pesquisar")} ({resultCount})
           </button>
         </div>
       </div>

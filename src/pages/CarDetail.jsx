@@ -2,23 +2,27 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { getCarById } from "../data/cars.js";
 import CarImage from "../components/CarImage.jsx";
 import SpecIcon from "../components/SpecIcon.jsx";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
+import { localizeCar } from "../i18n/localizeCar.js";
 
-const SPEC_ROWS = (car) => [
-  ["Marca", car.marca],
-  ["Modelo", car.modelo],
-  ["Ano", car.ano],
-  ["Quilometragem", `${car.km.toLocaleString("pt-PT")} km`],
-  ["Combustível", car.combustivel],
-  ["Transmissão", car.transmissao],
-  ["Potência", `${car.potencia} cv`],
-  ["Consumo médio", car.consumo],
-  ["Cor", car.cor],
-  ["Portas", car.portas],
+const SPEC_ROWS = (car, t) => [
+  ["marca", t("home.marca"), car.marca],
+  ["modelo", t("home.modelo"), car.modelo],
+  ["ano", t("car.ano"), car.ano],
+  ["km", t("car.km"), `${car.km.toLocaleString("pt-PT")} km`],
+  ["combustivel", t("home.combustivel"), car.combustivel],
+  ["transmissao", t("car.transmissao"), car.transmissao],
+  ["potencia", t("car.potencia"), `${car.potencia} cv`],
+  ["consumo", t("car.consumo"), car.consumo],
+  ["cor", t("car.cor"), car.cor],
+  ["portas", t("car.portas"), car.portas],
 ];
 
 export default function CarDetail() {
   const { id } = useParams();
-  const car = getCarById(id);
+  const { t, lang } = useLanguage();
+  const carRaw = getCarById(id);
+  const car = carRaw ? localizeCar(carRaw, lang) : null;
 
   if (!car) {
     return <Navigate to="/404" replace />;
@@ -28,7 +32,7 @@ export default function CarDetail() {
     <>
       <div className="border-b border-paper-line bg-white px-6 py-4 sm:px-12">
         <Link to="/" className="font-sans text-sm text-paper-muted hover:text-paper-text">
-          ← Voltar às viaturas
+          {t("car.voltar")}
         </Link>
       </div>
 
@@ -61,7 +65,7 @@ export default function CarDetail() {
           )}
 
           <div className="mt-10">
-            <h2 className="font-head text-xl font-medium text-paper-text">Descrição</h2>
+            <h2 className="font-head text-xl font-medium text-paper-text">{t("car.descricao")}</h2>
             <p className="mt-3 max-w-2xl font-sans text-[15px] leading-[1.75] text-paper-muted">
               {car.descricao}
             </p>
@@ -82,7 +86,7 @@ export default function CarDetail() {
                 <circle cx="12" cy="12" r="9" />
                 <path d="m8 12.5 2.5 2.5L16 9.5" />
               </svg>
-              Destaques
+              {t("car.destaques")}
             </h2>
             <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {car.destaques.map((item) => (
@@ -125,26 +129,28 @@ export default function CarDetail() {
                 to="/contactos"
                 className="bg-ink px-5 py-3.5 text-center font-sans text-sm font-medium text-white transition-opacity hover:opacity-85"
               >
-                Tenho interesse — contactar
+                {t("car.interesse")}
               </Link>
               <a
                 href="tel:+351220000000"
                 className="border border-paper-line px-5 py-3.5 text-center font-sans text-sm text-paper-text transition-colors hover:border-paper-text"
               >
-                Ligar: 220 000 000
+                {t("car.ligar")}: 220 000 000
               </a>
             </div>
           </div>
 
           <div className="mt-6 border border-line bg-ink p-6">
-            <div className="mb-1 font-sans text-xs tracking-wide text-silver">Ficha técnica</div>
-            {SPEC_ROWS(car).map(([label, val]) => (
+            <div className="mb-1 font-sans text-xs tracking-wide text-silver">
+              {t("car.fichaTecnica")}
+            </div>
+            {SPEC_ROWS(car, t).map(([specKey, label, val]) => (
               <div
-                key={label}
+                key={specKey}
                 className="flex items-center justify-between border-t border-line py-3 font-sans"
               >
                 <span className="flex items-center gap-2.5 text-sm text-muted">
-                  <SpecIcon label={label} car={car} />
+                  <SpecIcon specKey={specKey} car={car} />
                   {label}
                 </span>
                 <span className="text-sm text-cream">{val}</span>

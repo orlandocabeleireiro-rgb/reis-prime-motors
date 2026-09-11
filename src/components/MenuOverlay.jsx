@@ -1,0 +1,119 @@
+import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { siInstagram, siWhatsapp } from "simple-icons";
+import SocialIcon from "./SocialIcon.jsx";
+import { INSTAGRAM_URL, WHATSAPP_URL } from "../data/social.js";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
+
+function MenuLink({ to, title, desc, onClose }) {
+  return (
+    <NavLink
+      to={to}
+      onClick={onClose}
+      className="group flex items-center justify-between border-b border-line py-6 transition-colors hover:text-silver"
+    >
+      <span>
+        <span className="block font-head text-3xl font-medium text-cream group-hover:text-silver sm:text-4xl">
+          {title}
+        </span>
+        <span className="mt-1.5 block font-sans text-sm text-muted">{desc}</span>
+      </span>
+      <svg
+        viewBox="0 0 24 24"
+        className="h-6 w-6 flex-shrink-0 text-muted transition-transform group-hover:translate-x-1 group-hover:text-silver"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M9 6l6 6-6 6" />
+      </svg>
+    </NavLink>
+  );
+}
+
+export default function MenuOverlay({ open, onClose }) {
+  const { t } = useLanguage();
+
+  useEffect(() => {
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col bg-ink">
+      <div className="flex items-center justify-between border-b border-line px-6 py-5 sm:px-12">
+        <span className="font-sans text-xs tracking-[0.3em] text-silver">{t("menu.title")}</span>
+        <button
+          onClick={onClose}
+          aria-label={t("menu.close")}
+          className="flex h-9 w-9 items-center justify-center text-cream transition-colors hover:text-silver"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <path d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        </button>
+      </div>
+
+      <nav className="flex-1 overflow-y-auto px-6 py-4 sm:px-12">
+        <div className="mx-auto max-w-2xl">
+          <MenuLink to="/" title={t("menu.viaturas")} desc={t("menu.viaturas_desc")} onClose={onClose} />
+          <MenuLink
+            to="/contactos"
+            title={t("menu.financiamento")}
+            desc={t("menu.financiamento_desc")}
+            onClose={onClose}
+          />
+          <MenuLink
+            to="/contactos"
+            title={t("menu.sobre")}
+            desc={t("menu.sobre_desc")}
+            onClose={onClose}
+          />
+          <MenuLink
+            to="/contactos"
+            title={t("menu.contactos")}
+            desc={t("menu.contactos_desc")}
+            onClose={onClose}
+          />
+        </div>
+      </nav>
+
+      <div className="flex items-center justify-center gap-5 border-t border-line px-6 py-6 sm:px-12">
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          className="text-muted transition-colors hover:text-cream"
+        >
+          <SocialIcon icon={siInstagram} />
+        </a>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+          className="text-muted transition-colors hover:text-cream"
+        >
+          <SocialIcon icon={siWhatsapp} />
+        </a>
+      </div>
+    </div>
+  );
+}

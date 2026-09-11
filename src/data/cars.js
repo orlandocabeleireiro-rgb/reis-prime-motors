@@ -483,7 +483,7 @@ export const CARS = [
     cor: "Prateado Iridium",
     portas: 4,
     potencia: 306,
-    consumo: "1,7 l/100km (+ 25 km em modo elétrico)",
+    consumo: "1,7 l/100km",
     descricao:
       "Mercedes-Benz E 300 de, híbrido plug-in a gasóleo que junta a eficiência do elétrico em cidade com a autonomia do diesel em viagem. Conforto e tecnologia ao nível do que é esperado da Classe E.",
     destaques: [

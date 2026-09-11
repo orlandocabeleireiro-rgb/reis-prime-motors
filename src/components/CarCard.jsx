@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import CarImage from "./CarImage.jsx";
 import KmIcon from "./KmIcon.jsx";
 import FuelIcon from "./FuelIcon.jsx";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 export default function CarCard({ car }) {
+  const { t } = useLanguage();
+
   return (
     <div className="flex flex-col border border-paper-line bg-white">
       <CarImage car={car} className="aspect-[16/10]" overlayClassName="flex items-end p-3.5">
@@ -30,7 +33,7 @@ export default function CarCard({ car }) {
             to={`/carros/${car.id}`}
             className="border border-ink bg-ink px-3.5 py-2 font-sans text-xs text-white transition-opacity hover:opacity-85"
           >
-            Ver detalhes
+            {t("car.verDetalhes")}
           </Link>
         </div>
       </div>

@@ -1,7 +1,9 @@
 import { useRef } from "react";
 import CarCard from "./CarCard.jsx";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 export default function CarCarousel({ cars }) {
+  const { t } = useLanguage();
   const trackRef = useRef(null);
 
   function scrollByPage(direction) {
@@ -17,7 +19,7 @@ export default function CarCarousel({ cars }) {
       <div className="mb-4 flex justify-end gap-2">
         <button
           onClick={() => scrollByPage(-1)}
-          aria-label="Viaturas anteriores"
+          aria-label={t("home.anteriores")}
           className="flex h-9 w-9 items-center justify-center border border-paper-line text-paper-muted transition-colors hover:border-paper-text hover:text-paper-text"
         >
           <svg
@@ -34,7 +36,7 @@ export default function CarCarousel({ cars }) {
         </button>
         <button
           onClick={() => scrollByPage(1)}
-          aria-label="Viaturas seguintes"
+          aria-label={t("home.seguintes")}
           className="flex h-9 w-9 items-center justify-center border border-paper-line text-paper-muted transition-colors hover:border-paper-text hover:text-paper-text"
         >
           <svg

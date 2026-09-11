@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import CarImage from "./CarImage.jsx";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 const INTERVAL_MS = 5000;
 const DRAG_THRESHOLD_PX = 60;
 const CLICK_SUPPRESS_PX = 8;
 
 export default function FeaturedCarousel({ cars }) {
+  const { t } = useLanguage();
   const [index, setIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -91,7 +93,7 @@ export default function FeaturedCarousel({ cars }) {
       }}
     >
       <div className="flex items-center justify-between px-7 pt-6">
-        <span className="font-sans text-xs tracking-wide text-silver">Em destaque</span>
+        <span className="font-sans text-xs tracking-wide text-silver">{t("home.destaque")}</span>
         <span className="font-sans text-xs text-muted">
           {index + 1} / {cars.length}
         </span>
@@ -141,7 +143,7 @@ export default function FeaturedCarousel({ cars }) {
             <button
               key={car.id}
               onClick={() => goTo(i)}
-              aria-label={`Ver ${car.marca} ${car.modelo}`}
+              aria-label={`${t("home.ver")} ${car.marca} ${car.modelo}`}
               className={`h-1.5 w-1.5 rounded-full transition-colors ${
                 i === index ? "bg-silver" : "bg-line"
               }`}

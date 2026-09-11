@@ -3,7 +3,9 @@
 export default function FuelIcon({ combustivel, className = "h-4 w-4" }) {
   if (!combustivel) return null;
 
-  if (combustivel.includes("Elétrico")) {
+  // Reconhece o valor em qualquer um dos 3 idiomas (PT/ES/EN), já que
+  // este componente pode receber o rótulo já traduzido.
+  if (/el[ée]tric|electric/i.test(combustivel)) {
     return (
       <svg
         role="img"
@@ -18,7 +20,7 @@ export default function FuelIcon({ combustivel, className = "h-4 w-4" }) {
     );
   }
 
-  if (combustivel.includes("Híbrido")) {
+  if (/híbrido|hybrid/i.test(combustivel)) {
     return (
       <svg
         role="img"

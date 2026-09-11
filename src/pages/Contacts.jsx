@@ -1,15 +1,23 @@
 import { useState } from "react";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
-const INFO = [
-  ["Morada", "Rua Principal, 123 — 4420 Gondomar, Porto"],
-  ["Telefone", "220 000 000"],
-  ["Email", "geral@reisprimemotors.pt"],
-  ["Horário", "Seg–Sex 09h30–19h00 · Sáb 10h00–13h00"],
-];
+const HORARIO = {
+  pt: "Seg–Sex 09h30–19h00 · Sáb 10h00–13h00",
+  es: "Lun–Vie 09:30–19:00 · Sáb 10:00–13:00",
+  en: "Mon–Fri 9:30am–7pm · Sat 10am–1pm",
+};
 
 export default function Contacts() {
+  const { t, lang } = useLanguage();
   const [form, setForm] = useState({ nome: "", email: "", telefone: "", mensagem: "" });
   const [enviado, setEnviado] = useState(false);
+
+  const info = [
+    [t("contacts.morada"), "Rua Principal, 123 — 4420 Gondomar, Porto"],
+    [t("contacts.telefone"), "220 000 000"],
+    [t("contacts.email"), "geral@reisprimemotors.pt"],
+    [t("contacts.horario"), HORARIO[lang] ?? HORARIO.pt],
+  ];
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -26,10 +34,11 @@ export default function Contacts() {
   return (
     <>
       <section className="bg-ink px-6 py-14 text-cream sm:px-12 sm:py-16">
-        <h1 className="font-head text-4xl font-medium text-cream sm:text-5xl">Contactos</h1>
+        <h1 className="font-head text-4xl font-medium text-cream sm:text-5xl">
+          {t("contacts.title")}
+        </h1>
         <p className="mt-4 max-w-[520px] font-sans text-base leading-[1.7] text-muted">
-          Tem uma viatura em mente ou quer visitar o stand? Fale connosco — respondemos o mais
-          rápido possível.
+          {t("contacts.subtitle")}
         </p>
       </section>
 
@@ -42,7 +51,7 @@ export default function Contacts() {
           />
 
           <dl className="flex flex-col gap-5">
-            {INFO.map(([label, val]) => (
+            {info.map(([label, val]) => (
               <div key={label} className="border-t border-paper-line pt-4 first:border-t-0 first:pt-0">
                 <dt className="font-sans text-xs tracking-wide text-silver">{label}</dt>
                 <dd className="mt-1 font-sans text-[15px] text-paper-text">{val}</dd>
@@ -65,11 +74,10 @@ export default function Contacts() {
         <div>
           {enviado ? (
             <div className="border border-paper-line bg-white p-8">
-              <h2 className="font-head text-xl font-medium text-paper-text">Mensagem enviada</h2>
-              <p className="mt-2 font-sans text-sm text-paper-muted">
-                Obrigado pelo contacto, {form.nome || "!"} A nossa equipa irá responder brevemente
-                através do email ou telefone indicados.
-              </p>
+              <h2 className="font-head text-xl font-medium text-paper-text">
+                {t("contacts.enviado")}
+              </h2>
+              <p className="mt-2 font-sans text-sm text-paper-muted">{t("contacts.enviadoTexto")}</p>
               <button
                 onClick={() => {
                   setForm({ nome: "", email: "", telefone: "", mensagem: "" });
@@ -77,18 +85,20 @@ export default function Contacts() {
                 }}
                 className="mt-6 border border-ink bg-ink px-5 py-3 font-sans text-sm text-white transition-opacity hover:opacity-85"
               >
-                Enviar nova mensagem
+                {t("contacts.novaMensagem")}
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="border border-paper-line bg-white p-8">
               <h2 className="mb-6 font-head text-xl font-medium text-paper-text">
-                Envie-nos uma mensagem
+                {t("contacts.formTitle")}
               </h2>
 
               <div className="flex flex-col gap-5">
                 <label className="flex flex-col gap-1.5">
-                  <span className="font-sans text-xs tracking-wide text-paper-muted">Nome</span>
+                  <span className="font-sans text-xs tracking-wide text-paper-muted">
+                    {t("contacts.nome")}
+                  </span>
                   <input
                     required
                     name="nome"
@@ -101,7 +111,7 @@ export default function Contacts() {
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <label className="flex flex-col gap-1.5">
                     <span className="font-sans text-xs tracking-wide text-paper-muted">
-                      Email
+                      {t("contacts.email")}
                     </span>
                     <input
                       required
@@ -114,7 +124,7 @@ export default function Contacts() {
                   </label>
                   <label className="flex flex-col gap-1.5">
                     <span className="font-sans text-xs tracking-wide text-paper-muted">
-                      Telefone
+                      {t("contacts.telefone")}
                     </span>
                     <input
                       type="tel"
@@ -128,7 +138,7 @@ export default function Contacts() {
 
                 <label className="flex flex-col gap-1.5">
                   <span className="font-sans text-xs tracking-wide text-paper-muted">
-                    Mensagem
+                    {t("contacts.mensagem")}
                   </span>
                   <textarea
                     required
@@ -144,7 +154,7 @@ export default function Contacts() {
                   type="submit"
                   className="mt-2 bg-ink px-5 py-3.5 font-sans text-sm font-medium text-white transition-opacity hover:opacity-85"
                 >
-                  Enviar mensagem
+                  {t("contacts.enviar")}
                 </button>
               </div>
             </form>

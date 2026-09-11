@@ -1,7 +1,9 @@
 import { useId } from "react";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 export default function PriceField({ label, value, onChange, options = [] }) {
   const listId = useId();
+  const { t } = useLanguage();
 
   return (
     <div className="flex-1">
@@ -17,7 +19,7 @@ export default function PriceField({ label, value, onChange, options = [] }) {
           step="1000"
           value={value ?? ""}
           onChange={onChange}
-          placeholder="Sem limite"
+          placeholder={t("home.semLimite")}
           className="w-full border border-paper-line bg-white px-3.5 py-3 pr-10 font-sans text-sm text-paper-text outline-none transition-colors placeholder:text-paper-muted/60 focus:border-paper-text"
         />
         <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 font-sans text-sm text-paper-muted">
@@ -27,7 +29,7 @@ export default function PriceField({ label, value, onChange, options = [] }) {
         <datalist id={listId}>
           {options.map((o) => (
             <option key={o} value={o}>
-              {`Até ${o.toLocaleString("pt-PT")} €`}
+              {`${t("home.ate")} ${o.toLocaleString("pt-PT")} €`}
             </option>
           ))}
         </datalist>
