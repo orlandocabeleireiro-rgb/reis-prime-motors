@@ -6,6 +6,8 @@ import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
 import CarCarousel from "../components/CarCarousel.jsx";
 import { CARS } from "../data/cars.js";
 
+const PRECO_OPCOES = [15000, 20000, 30000, 40000, 60000, 80000, 100000];
+
 function scrollToResultados() {
   document.getElementById("resultados")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -152,6 +154,7 @@ export default function Home() {
             setCombustivel={setCombustivel}
             precoMax={precoMax}
             setPrecoMax={setPrecoMax}
+            precoOpcoes={PRECO_OPCOES}
             resultCount={filtrados.length}
             onSearch={scrollToResultados}
           />

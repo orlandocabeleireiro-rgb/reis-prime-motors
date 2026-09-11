@@ -14,6 +14,7 @@ export default function CarSearch({
   setCombustivel,
   precoMax,
   setPrecoMax,
+  precoOpcoes,
   resultCount,
   onSearch,
 }) {
@@ -78,6 +79,7 @@ export default function CarSearch({
           <PriceField
             label="Preço máximo"
             value={precoMax}
+            options={precoOpcoes}
             onChange={(e) => {
               const v = e.target.value;
               setPrecoMax(v === "" ? null : Number(v));
