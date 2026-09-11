@@ -730,38 +730,6 @@ const TRANSLATIONS = {
       ],
     },
   },
-  25: {
-    es: {
-      descricao:
-        "Mercedes-Benz Clase C 220d con el paquete AMG Line, elegante y deportivo. Excelente relación entre confort, tecnología y consumo.",
-      destaques: [
-        "Paquete exterior e interior AMG Line",
-        "MBUX con pantalla de gran tamaño",
-        "Faros Multibeam LED",
-        "Asientos delanteros con calefacción",
-      ],
-    },
-    en: {
-      descricao:
-        "Mercedes-Benz C-Class 220d with the AMG Line package, elegant and sporty. Excellent balance of comfort, technology and fuel consumption.",
-      destaques: [
-        "AMG Line exterior and interior package",
-        "MBUX with large display",
-        "Multibeam LED headlights",
-        "Heated front seats",
-      ],
-    },
-    fr: {
-      descricao:
-        "Mercedes-Benz Classe C 220d avec le pack AMG Line, élégante et sportive. Excellent équilibre entre confort, technologie et consommation.",
-      destaques: [
-        "Pack extérieur et intérieur AMG Line",
-        "MBUX avec grand écran",
-        "Phares Multibeam LED",
-        "Sièges avant chauffants",
-      ],
-    },
-  },
   27: {
     es: {
       descricao:

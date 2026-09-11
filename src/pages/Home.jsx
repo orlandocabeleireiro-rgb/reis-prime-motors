@@ -56,10 +56,17 @@ export default function Home() {
     if (scroll) scrollToResultados();
   }
 
-  const destaques = useMemo(
-    () => [...CARS].sort((a, b) => b.preco - a.preco).slice(0, 5).map((c) => localizeCar(c, lang)),
-    [lang]
-  );
+  // Destaques: normalmente os mais caros, mas o Mustang Mach-E e o
+  // Tesla Model 3 entram sempre primeiro (pedido do cliente para ver
+  // como ficam em destaque).
+  const DESTAQUES_FORCADOS = [29, 30];
+  const destaques = useMemo(() => {
+    const forcados = CARS.filter((c) => DESTAQUES_FORCADOS.includes(c.id));
+    const resto = CARS.filter((c) => !DESTAQUES_FORCADOS.includes(c.id)).sort(
+      (a, b) => b.preco - a.preco
+    );
+    return [...forcados, ...resto].slice(0, 5).map((c) => localizeCar(c, lang));
+  }, [lang]);
 
   const filtrados = useMemo(() => {
     let list = CARS.filter(
