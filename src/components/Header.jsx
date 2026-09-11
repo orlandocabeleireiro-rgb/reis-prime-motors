@@ -1,20 +1,34 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher.jsx";
 import MenuOverlay from "./MenuOverlay.jsx";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 
+// Na página inicial o cabeçalho fica sobreposto ao vídeo do hero (sem
+// fundo, texto claro); nas restantes páginas é o cabeçalho sólido normal.
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { t } = useLanguage();
+  const { pathname } = useLocation();
+  const overlay = pathname === "/";
 
   return (
     <>
-      <header className="relative flex items-center justify-between border-b border-paper-line bg-white px-6 py-5 sm:px-12">
+      <header
+        className={`flex items-center justify-between px-6 py-5 sm:px-12 ${
+          overlay
+            ? "absolute inset-x-0 top-0 z-30 border-b-0 bg-transparent"
+            : "relative border-b border-paper-line bg-white"
+        }`}
+      >
         <button
           onClick={() => setMenuOpen(true)}
           aria-label={t("header.menu")}
-          className="flex items-center gap-2.5 font-sans text-sm text-paper-text transition-colors hover:text-paper-muted"
+          className={`flex items-center gap-2.5 font-sans text-sm transition-opacity ${
+            overlay
+              ? "text-cream drop-shadow-[0_1px_6px_rgba(0,0,0,0.55)] hover:opacity-75"
+              : "text-paper-text transition-colors hover:text-paper-muted"
+          }`}
         >
           <svg
             viewBox="0 0 24 24"
@@ -32,20 +46,34 @@ export default function Header() {
 
         <NavLink
           to="/"
-          className="absolute left-1/2 flex -translate-x-1/2 items-center gap-3"
+          className={`absolute left-1/2 flex -translate-x-1/2 items-center gap-3 ${
+            overlay ? "drop-shadow-[0_1px_6px_rgba(0,0,0,0.55)]" : ""
+          }`}
         >
-          <img src="/reis-mark.png" alt="Reis Prime Motors" className="block h-4 w-auto" />
-          <span className="hidden font-sans text-[13px] font-normal tracking-[0.3em] text-silver min-[480px]:inline">
+          <img
+            src="/reis-mark.png"
+            alt="Reis Prime Motors"
+            className={`block h-4 w-auto ${overlay ? "brightness-0 invert" : ""}`}
+          />
+          <span
+            className={`hidden font-sans text-[13px] font-normal tracking-[0.3em] min-[480px]:inline ${
+              overlay ? "text-cream/80" : "text-silver"
+            }`}
+          >
             PRIME MOTORS
           </span>
         </NavLink>
 
         <div className="flex items-center gap-4">
-          <LanguageSwitcher />
+          <LanguageSwitcher overlay={overlay} />
           <button
             aria-label={t("header.account")}
             title={t("header.account")}
-            className="flex h-7 w-7 items-center justify-center text-paper-muted transition-colors hover:text-paper-text"
+            className={`flex h-7 w-7 items-center justify-center transition-opacity ${
+              overlay
+                ? "text-cream drop-shadow-[0_1px_6px_rgba(0,0,0,0.55)] hover:opacity-75"
+                : "text-paper-muted transition-colors hover:text-paper-text"
+            }`}
           >
             <svg
               viewBox="0 0 24 24"

@@ -3,7 +3,7 @@ import FlagIcon from "./FlagIcon.jsx";
 import { LANGUAGES } from "../i18n/translations.js";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher({ overlay = false }) {
   const { lang, setLang, t } = useLanguage();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -24,7 +24,11 @@ export default function LanguageSwitcher() {
         onClick={() => setOpen((o) => !o)}
         aria-label={t("header.language")}
         aria-expanded={open}
-        className="block h-7 w-7 overflow-hidden rounded-full ring-1 ring-paper-line transition-shadow hover:ring-paper-text"
+        className={`block h-7 w-7 overflow-hidden rounded-full ring-1 transition-shadow ${
+          overlay
+            ? "shadow-[0_1px_6px_rgba(0,0,0,0.55)] ring-white/60 hover:ring-white"
+            : "ring-paper-line hover:ring-paper-text"
+        }`}
       >
         <FlagIcon code={current.flag} className="h-7 w-7" />
       </button>

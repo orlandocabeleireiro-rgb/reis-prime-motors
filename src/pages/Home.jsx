@@ -58,33 +58,47 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="grid gap-10 bg-ink px-6 py-16 text-cream sm:px-12 sm:py-20 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-10 lg:py-[90px]">
-        <div>
-          <h1 className="max-w-[640px] font-head text-4xl font-medium leading-[1.05] text-cream sm:text-5xl lg:text-[40px]">
-            {t("home.heroTitle1")}
-            <br />
-            {t("home.heroTitle2")}
-          </h1>
-          <p className="mt-5 max-w-[460px] font-sans text-base leading-[1.7] text-muted">
-            {t("home.heroText")}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href="#viaturas"
-              className="bg-white px-6 py-3.5 font-sans text-sm font-medium text-ink transition-opacity hover:opacity-90"
-            >
-              {t("home.ctaVer")}
-            </a>
-            <Link
-              to="/contactos"
-              className="border border-line px-6 py-3.5 font-sans text-sm text-cream transition-colors hover:border-silver"
-            >
-              {t("home.ctaFalar")}
-            </Link>
+      {/* Hero — vídeo de fundo, cabeçalho sobreposto (ver Header.jsx) */}
+      <section className="relative min-h-[640px] overflow-hidden bg-ink text-cream sm:min-h-[680px] lg:min-h-[760px]">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/video/hero-car.mp4"
+          poster="/video/hero-car-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        {/* Sombra escura leve — só o suficiente para o texto se ler bem */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-black/55" />
+
+        <div className="relative grid gap-10 px-6 pb-16 pt-32 sm:px-12 sm:pb-20 sm:pt-36 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-10 lg:pb-[90px] lg:pt-40">
+          <div>
+            <h1 className="max-w-[640px] font-head text-4xl font-medium leading-[1.05] text-cream drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] sm:text-5xl lg:text-[40px]">
+              {t("home.heroTitle1")}
+              <br />
+              {t("home.heroTitle2")}
+            </h1>
+            <p className="mt-5 max-w-[460px] font-sans text-base leading-[1.7] text-cream/85 drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">
+              {t("home.heroText")}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href="#viaturas"
+                className="bg-white px-6 py-3.5 font-sans text-sm font-medium text-ink transition-opacity hover:opacity-90"
+              >
+                {t("home.ctaVer")}
+              </a>
+              <Link
+                to="/contactos"
+                className="border border-white/40 px-6 py-3.5 font-sans text-sm text-cream backdrop-blur-[2px] transition-colors hover:border-white"
+              >
+                {t("home.ctaFalar")}
+              </Link>
+            </div>
           </div>
+          <FeaturedCarousel cars={destaques} />
         </div>
-        <FeaturedCarousel cars={destaques} />
       </section>
 
       {/* Catálogo */}
