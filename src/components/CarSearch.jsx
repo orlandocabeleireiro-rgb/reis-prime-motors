@@ -1,5 +1,6 @@
 import BrandIcon from "./BrandIcon.jsx";
 import SelectField from "./SelectField.jsx";
+import PriceField from "./PriceField.jsx";
 
 export default function CarSearch({
   marcas,
@@ -13,7 +14,6 @@ export default function CarSearch({
   setCombustivel,
   precoMax,
   setPrecoMax,
-  precoOpcoes,
   resultCount,
   onSearch,
 }) {
@@ -75,14 +75,13 @@ export default function CarSearch({
               ...combustiveis.map((c) => ({ value: c, label: c })),
             ]}
           />
-          <SelectField
+          <PriceField
             label="Preço máximo"
-            value={String(precoMax)}
-            onChange={(e) => setPrecoMax(Number(e.target.value))}
-            options={precoOpcoes.map((p) => ({
-              value: String(p),
-              label: `Até ${p.toLocaleString("pt-PT")} €`,
-            }))}
+            value={precoMax}
+            onChange={(e) => {
+              const v = e.target.value;
+              setPrecoMax(v === "" ? null : Number(v));
+            }}
           />
           <button
             onClick={onSearch}

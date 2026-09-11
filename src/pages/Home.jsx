@@ -6,9 +6,6 @@ import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
 import CarCarousel from "../components/CarCarousel.jsx";
 import { CARS } from "../data/cars.js";
 
-const PRECO_MAX = 100000;
-const PRECO_OPCOES = [20000, 40000, 60000, 80000, PRECO_MAX];
-
 function scrollToResultados() {
   document.getElementById("resultados")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -17,7 +14,7 @@ export default function Home() {
   const [marca, setMarca] = useState("Todas");
   const [modelo, setModelo] = useState("Todos");
   const [combustivel, setCombustivel] = useState("Todos");
-  const [precoMax, setPrecoMax] = useState(PRECO_MAX);
+  const [precoMax, setPrecoMax] = useState(null); // null = sem limite de preço
   const [vista, setVista] = useState("grelha");
 
   const marcas = useMemo(() => [...new Set(CARS.map((c) => c.marca))], []);
@@ -49,7 +46,7 @@ export default function Home() {
           (marca === "Todas" || c.marca === marca) &&
           (modelo === "Todos" || c.modelo === modelo) &&
           (combustivel === "Todos" || c.combustivel === combustivel) &&
-          c.preco <= precoMax
+          (precoMax === null || c.preco <= precoMax)
       ),
     [marca, modelo, combustivel, precoMax]
   );
@@ -155,7 +152,6 @@ export default function Home() {
             setCombustivel={setCombustivel}
             precoMax={precoMax}
             setPrecoMax={setPrecoMax}
-            precoOpcoes={PRECO_OPCOES}
             resultCount={filtrados.length}
             onSearch={scrollToResultados}
           />
