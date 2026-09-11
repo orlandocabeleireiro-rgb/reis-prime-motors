@@ -7,6 +7,9 @@ import CarCarousel from "../components/CarCarousel.jsx";
 import { CARS } from "../data/cars.js";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 import { localizeCar } from "../i18n/localizeCar.js";
+import { useColumns } from "../hooks/useColumns.js";
+
+const ROWS_PER_PAGE = 3;
 
 const PRECO_OPCOES = [15000, 20000, 30000, 40000, 60000, 80000, 100000];
 
@@ -22,6 +25,9 @@ export default function Home() {
   const [combustivel, setCombustivel] = useState("Todos");
   const [precoMax, setPrecoMax] = useState(null); // null = sem limite de preço
   const [vista, setVista] = useState("carrossel");
+  const [page, setPage] = useState(0);
+  const cols = useColumns();
+  const perPage = cols * ROWS_PER_PAGE;
 
   // Atalhos vindos do menu (ex.: /?marca=BMW, /?combustivel=Elétrico,
   // /?ordenar=recentes) — aplicam o filtro e vão direto aos resultados.
@@ -84,6 +90,15 @@ export default function Home() {
     return list.map((c) => localizeCar(c, lang));
   }, [marca, modelo, combustivel, precoMax, lang, ordenar]);
 
+  // Paginação da vista "carrossel" — sempre no máximo 3 filas por página.
+  useEffect(() => {
+    setPage(0);
+  }, [marca, modelo, combustivel, precoMax, ordenar, vista, perPage]);
+
+  const pageCount = Math.max(1, Math.ceil(filtrados.length / perPage));
+  const currentPage = Math.min(page, pageCount - 1);
+  const pageCars = filtrados.slice(currentPage * perPage, currentPage * perPage + perPage);
+
   return (
     <>
       {/* Hero — vídeo de fundo, cabeçalho sobreposto (ver Header.jsx) */}
@@ -135,54 +150,9 @@ export default function Home() {
           <h2 className="font-head text-2xl font-medium text-paper-text sm:text-3xl">
             {t("home.catalogo")}
           </h2>
-          <div className="flex items-center gap-4">
-            <span className="font-sans text-[13px] text-paper-muted">
-              {filtrados.length} {t("home.de")} {CARS.length}
-            </span>
-            <div className="flex border border-paper-line">
-              <button
-                onClick={() => setVista("grelha")}
-                aria-label={t("home.grelha")}
-                aria-pressed={vista === "grelha"}
-                className={`flex h-8 w-9 items-center justify-center transition-colors ${
-                  vista === "grelha"
-                    ? "bg-ink text-white"
-                    : "text-paper-muted hover:text-paper-text"
-                }`}
-              >
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
-                  <rect x="3" y="3" width="7" height="7" />
-                  <rect x="14" y="3" width="7" height="7" />
-                  <rect x="3" y="14" width="7" height="7" />
-                  <rect x="14" y="14" width="7" height="7" />
-                </svg>
-              </button>
-              <button
-                onClick={() => setVista("carrossel")}
-                aria-label={t("home.carrossel")}
-                aria-pressed={vista === "carrossel"}
-                className={`flex h-8 w-9 items-center justify-center border-l border-paper-line transition-colors ${
-                  vista === "carrossel"
-                    ? "bg-ink text-white"
-                    : "text-paper-muted hover:text-paper-text"
-                }`}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <rect x="7" y="5" width="10" height="14" rx="1" />
-                  <path d="M3 9v6M21 9v6" />
-                </svg>
-              </button>
-            </div>
-          </div>
+          <span className="font-sans text-[13px] text-paper-muted">
+            {filtrados.length} {t("home.de")} {CARS.length}
+          </span>
         </div>
 
         <div className="mb-10">
@@ -205,6 +175,100 @@ export default function Home() {
         </div>
 
         <div id="resultados" />
+
+        {filtrados.length > 0 && (
+          <div className="mb-4 flex items-center justify-end gap-3">
+            {vista === "carrossel" && pageCount > 1 && (
+              <>
+                <span className="font-sans text-[13px] text-paper-muted">
+                  {currentPage + 1} / {pageCount}
+                </span>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setPage((p) => Math.max(0, p - 1))}
+                    disabled={currentPage === 0}
+                    aria-label={t("home.anteriores")}
+                    className="flex h-9 w-9 items-center justify-center border border-paper-line text-paper-muted transition-colors hover:border-paper-text hover:text-paper-text disabled:pointer-events-none disabled:opacity-30"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M15 6l-6 6 6 6" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
+                    disabled={currentPage === pageCount - 1}
+                    aria-label={t("home.seguintes")}
+                    className="flex h-9 w-9 items-center justify-center border border-paper-line text-paper-muted transition-colors hover:border-paper-text hover:text-paper-text disabled:pointer-events-none disabled:opacity-30"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </button>
+                </div>
+              </>
+            )}
+            <div className="flex border border-paper-line">
+              <button
+                onClick={() => setVista("grelha")}
+                aria-label={t("home.grelha")}
+                aria-pressed={vista === "grelha"}
+                className={`flex h-9 w-9 items-center justify-center transition-colors ${
+                  vista === "grelha"
+                    ? "bg-ink text-white"
+                    : "text-paper-muted hover:text-paper-text"
+                }`}
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => setVista("carrossel")}
+                aria-label={t("home.carrossel")}
+                aria-pressed={vista === "carrossel"}
+                className={`flex h-9 w-9 items-center justify-center border-l border-paper-line transition-colors ${
+                  vista === "carrossel"
+                    ? "bg-ink text-white"
+                    : "text-paper-muted hover:text-paper-text"
+                }`}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="7" y="5" width="10" height="14" rx="1" />
+                  <path d="M3 9v6M21 9v6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
+
         {filtrados.length > 0 ? (
           vista === "grelha" ? (
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -213,7 +277,7 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <CarCarousel cars={filtrados} />
+            <CarCarousel cars={pageCars} />
           )
         ) : (
           <p className="font-sans text-sm text-paper-muted">{t("home.vazio")}</p>
