@@ -79,7 +79,7 @@ export default function Home() {
                     : "border-paper-line text-paper-muted hover:border-paper-text hover:text-paper-text"
                 }`}
               >
-                <BrandIcon marca={m} className="h-4 w-4 flex-shrink-0" />
+                <BrandIcon marca={m} className="h-5 w-5 flex-shrink-0" />
                 {m}
               </button>
             ))}

@@ -17,21 +17,16 @@ import {
   siMini,
 } from "simple-icons";
 
-// Mercedes-Benz e BYD não estão disponíveis na biblioteca Simple Icons —
-// usamos o símbolo oficial de cada uma (imagem fornecida à parte), recortado
-// como máscara para herdar a mesma cor (currentColor) dos restantes
-// símbolos e manter tudo visualmente uniforme.
+// Estas marcas não estão disponíveis na biblioteca Simple Icons — usamos o
+// símbolo oficial de cada uma (imagem fornecida à parte), recortado como
+// máscara para herdar a mesma cor (currentColor) dos restantes símbolos e
+// manter tudo visualmente uniforme.
 const MASK_ICONS = {
   "Mercedes-Benz": "/brands/mercedes-benz.png",
   BYD: "/brands/byd.png",
-};
-
-// Estas marcas também não têm símbolo disponível — nesses casos usamos um
-// pequeno emblema genérico com as iniciais da marca.
-const INITIALS = {
-  Jaguar: "JAG",
-  Cupra: "CUP",
-  Mustang: "GT",
+  Jaguar: "/brands/jaguar.png",
+  Cupra: "/brands/cupra.png",
+  Mustang: "/brands/mustang.png",
 };
 
 const ICONS = {
@@ -87,33 +82,6 @@ export default function BrandIcon({ marca, className = "h-4 w-4" }) {
       >
         <title>{icon.title}</title>
         <path d={icon.path} />
-      </svg>
-    );
-  }
-
-  const initials = INITIALS[marca];
-  if (initials) {
-    return (
-      <svg
-        role="img"
-        viewBox="0 0 24 24"
-        className={className}
-        aria-hidden="true"
-      >
-        <title>{marca}</title>
-        <circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        <text
-          x="12"
-          y="12"
-          textAnchor="middle"
-          dominantBaseline="central"
-          fill="currentColor"
-          fontSize={initials.length > 2 ? "7" : "9"}
-          fontFamily="Inter, sans-serif"
-          fontWeight="600"
-        >
-          {initials}
-        </text>
       </svg>
     );
   }
