@@ -21,7 +21,7 @@ export default function Home() {
   const [modelo, setModelo] = useState("Todos");
   const [combustivel, setCombustivel] = useState("Todos");
   const [precoMax, setPrecoMax] = useState(null); // null = sem limite de preço
-  const [vista, setVista] = useState("grelha");
+  const [vista, setVista] = useState("carrossel");
 
   // Atalhos vindos do menu (ex.: /?marca=BMW, /?combustivel=Elétrico,
   // /?ordenar=recentes) — aplicam o filtro e vão direto aos resultados.
