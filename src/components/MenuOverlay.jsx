@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import { siInstagram, siWhatsapp } from "simple-icons";
 import SocialIcon from "./SocialIcon.jsx";
@@ -47,12 +47,11 @@ function Chip({ to, onClick, children }) {
   );
 }
 
-// "Veículos" expande in-line (em vez de navegar de imediato) e mostra
-// atalhos rápidos + a lista de marcas — cada um leva já ao catálogo
-// filtrado (ver Home.jsx, que lê estes parâmetros do URL).
+// "Viaturas" continua a levar direto ao catálogo ao clicar (como os
+// outros itens do menu) — os atalhos e a lista de marcas ficam sempre
+// visíveis por baixo, sem precisar de abrir/expandir nada.
 function VeiculosSection({ onClose }) {
   const { t } = useLanguage();
-  const [open, setOpen] = useState(false);
 
   const marcas = useMemo(
     () => [...new Set(CARS.map((c) => c.marca))].sort((a, b) => a.localeCompare(b)),
@@ -60,12 +59,8 @@ function VeiculosSection({ onClose }) {
   );
 
   return (
-    <div className="border-b border-line">
-      <button
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        className="group flex w-full items-center justify-between py-6 text-left transition-colors hover:text-silver"
-      >
+    <div className="border-b border-line py-6">
+      <NavLink to="/" onClick={onClose} className="group flex items-center justify-between">
         <span>
           <span className="block font-head text-3xl font-medium text-cream group-hover:text-silver sm:text-4xl">
             {t("menu.viaturas")}
@@ -76,9 +71,7 @@ function VeiculosSection({ onClose }) {
         </span>
         <svg
           viewBox="0 0 24 24"
-          className={`h-6 w-6 flex-shrink-0 text-muted transition-transform group-hover:text-silver ${
-            open ? "rotate-90" : ""
-          }`}
+          className="h-6 w-6 flex-shrink-0 text-muted transition-transform group-hover:translate-x-1 group-hover:text-silver"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.6"
@@ -88,44 +81,32 @@ function VeiculosSection({ onClose }) {
         >
           <path d="M9 6l6 6-6 6" />
         </svg>
-      </button>
+      </NavLink>
 
-      {open && (
-        <div className="pb-7">
-          <div className="flex flex-wrap gap-2.5">
-            <Chip to="/" onClick={onClose}>
-              {t("menu.verTodas")}
-            </Chip>
-            <Chip to={`/?combustivel=${encodeURIComponent("Elétrico")}`} onClick={onClose}>
-              {t("menu.eletricos")}
-            </Chip>
-            <Chip to={`/?combustivel=${encodeURIComponent("Híbrido")}`} onClick={onClose}>
-              {t("menu.hibridos")}
-            </Chip>
-            <Chip to="/?ordenar=recentes" onClick={onClose}>
-              {t("menu.recentes")}
-            </Chip>
-          </div>
+      <div className="mt-5 flex flex-wrap gap-2.5">
+        <Chip to={`/?combustivel=${encodeURIComponent("Elétrico")}`} onClick={onClose}>
+          {t("menu.eletricos")}
+        </Chip>
+        <Chip to={`/?combustivel=${encodeURIComponent("Híbrido")}`} onClick={onClose}>
+          {t("menu.hibridos")}
+        </Chip>
+        <Chip to="/?ordenar=recentes" onClick={onClose}>
+          {t("menu.recentes")}
+        </Chip>
+      </div>
 
-          <div className="mt-7">
-            <span className="font-sans text-xs tracking-[0.2em] text-muted">
-              {t("menu.marcas")}
-            </span>
-            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2.5">
-              {marcas.map((m) => (
-                <NavLink
-                  key={m}
-                  to={`/?marca=${encodeURIComponent(m)}`}
-                  onClick={onClose}
-                  className="font-sans text-sm text-muted transition-colors hover:text-cream"
-                >
-                  {m}
-                </NavLink>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+        {marcas.map((m) => (
+          <NavLink
+            key={m}
+            to={`/?marca=${encodeURIComponent(m)}`}
+            onClick={onClose}
+            className="font-sans text-sm text-muted transition-colors hover:text-cream"
+          >
+            {m}
+          </NavLink>
+        ))}
+      </div>
     </div>
   );
 }
