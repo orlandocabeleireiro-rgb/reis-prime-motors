@@ -171,7 +171,7 @@ export default function MenuOverlay({ open, onClose }) {
             onClose={onClose}
           />
           <MenuLink
-            to="/contactos"
+            to="/sobre-nos"
             title={t("menu.sobre")}
             desc={t("menu.sobre_desc")}
             onClose={onClose}

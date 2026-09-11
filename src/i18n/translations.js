@@ -80,6 +80,26 @@ const dict = {
       cor: "Cor",
       portas: "Portas",
     },
+    about: {
+      title: "Sobre nós",
+      subtitle:
+        "Somos um stand automóvel dedicado a viaturas usadas de qualidade, escolhidas com rigor e vendidas com total transparência.",
+      missaoTitle: "A nossa missão",
+      missaoTexto:
+        "Acreditamos que comprar um carro usado deve ser simples e seguro. Por isso selecionamos cada viatura com atenção ao detalhe, verificamos o seu estado e histórico, e acompanhamos o cliente antes e depois da compra.",
+      valoresTitle: "Porque escolher a Reis Prime Motors",
+      valor1Title: "Seleção rigorosa",
+      valor1Texto: "Cada viatura é escolhida a pensar em qualidade, fiabilidade e valor.",
+      valor2Title: "Transparência total",
+      valor2Texto: "Histórico e estado da viatura sempre claros, sem surpresas.",
+      valor3Title: "Garantia incluída",
+      valor3Texto: "Todas as viaturas são vendidas com garantia.",
+      valor4Title: "Apoio contínuo",
+      valor4Texto: "Estamos disponíveis antes, durante e depois da compra.",
+      ctaTexto: "Pronto para encontrar a sua próxima viatura?",
+      ctaVer: "Ver viaturas disponíveis",
+      ctaFalar: "Falar connosco",
+    },
     contacts: {
       title: "Contactos",
       subtitle:
@@ -178,6 +198,26 @@ const dict = {
       cor: "Color",
       portas: "Puertas",
     },
+    about: {
+      title: "Sobre nosotros",
+      subtitle:
+        "Somos un concesionario dedicado a vehículos usados de calidad, elegidos con rigor y vendidos con total transparencia.",
+      missaoTitle: "Nuestra misión",
+      missaoTexto:
+        "Creemos que comprar un coche usado debe ser sencillo y seguro. Por eso seleccionamos cada vehículo con atención al detalle, verificamos su estado e historial, y acompañamos al cliente antes y después de la compra.",
+      valoresTitle: "Por qué elegir Reis Prime Motors",
+      valor1Title: "Selección rigurosa",
+      valor1Texto: "Cada vehículo se elige pensando en calidad, fiabilidad y valor.",
+      valor2Title: "Transparencia total",
+      valor2Texto: "Historial y estado del vehículo siempre claros, sin sorpresas.",
+      valor3Title: "Garantía incluida",
+      valor3Texto: "Todos los vehículos se venden con garantía.",
+      valor4Title: "Apoyo continuo",
+      valor4Texto: "Estamos disponibles antes, durante y después de la compra.",
+      ctaTexto: "¿Listo para encontrar su próximo vehículo?",
+      ctaVer: "Ver vehículos disponibles",
+      ctaFalar: "Hable con nosotros",
+    },
     contacts: {
       title: "Contacto",
       subtitle:
@@ -275,6 +315,26 @@ const dict = {
       consumo: "Average consumption",
       cor: "Colour",
       portas: "Doors",
+    },
+    about: {
+      title: "About us",
+      subtitle:
+        "We're a car dealership dedicated to quality used cars, chosen with rigour and sold with full transparency.",
+      missaoTitle: "Our mission",
+      missaoTexto:
+        "We believe buying a used car should be simple and safe. That's why we select every car with attention to detail, verify its condition and history, and support our customers before and after the purchase.",
+      valoresTitle: "Why choose Reis Prime Motors",
+      valor1Title: "Rigorous selection",
+      valor1Texto: "Every car is chosen with quality, reliability and value in mind.",
+      valor2Title: "Full transparency",
+      valor2Texto: "Vehicle history and condition are always clear, no surprises.",
+      valor3Title: "Warranty included",
+      valor3Texto: "Every car is sold with a warranty.",
+      valor4Title: "Ongoing support",
+      valor4Texto: "We're available before, during and after the purchase.",
+      ctaTexto: "Ready to find your next car?",
+      ctaVer: "View available cars",
+      ctaFalar: "Talk to us",
     },
     contacts: {
       title: "Contact",
