@@ -165,7 +165,7 @@ export default function MenuOverlay({ open, onClose }) {
         <div className="mx-auto max-w-2xl">
           <VeiculosSection onClose={onClose} />
           <MenuLink
-            to="/contactos"
+            to="/financiamento"
             title={t("menu.financiamento")}
             desc={t("menu.financiamento_desc")}
             onClose={onClose}

@@ -5,6 +5,7 @@ import Home from "./pages/Home.jsx";
 import CarDetail from "./pages/CarDetail.jsx";
 import Contacts from "./pages/Contacts.jsx";
 import About from "./pages/About.jsx";
+import Financing from "./pages/Financing.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/carros/:id" element={<CarDetail />} />
           <Route path="/contactos" element={<Contacts />} />
           <Route path="/sobre-nos" element={<About />} />
+          <Route path="/financiamento" element={<Financing />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
