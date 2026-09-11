@@ -6,7 +6,6 @@ export default {
       fontFamily: {
         head: ["Oswald", "sans-serif"],
         sans: ["Inter", "sans-serif"],
-        display: ["Bebas Neue", "Oswald", "sans-serif"],
       },
       colors: {
         // Tema escuro (secções de destaque: hero, rodapé, cartões de dados)
