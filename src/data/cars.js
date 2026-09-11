@@ -564,29 +564,6 @@ export const CARS = [
       "Bancos dianteiros com aquecimento",
     ],
   },
-  {
-    id: 26,
-    marca: "Mercedes-Benz",
-    modelo: "EQB 300",
-    imagem: "/cars/mercedes-glb.png",
-    ano: 2023,
-    km: 9000,
-    preco: 58900,
-    combustivel: "Elétrico",
-    transmissao: "Automática",
-    cor: "Preto Obsidiana",
-    portas: 5,
-    potencia: 228,
-    consumo: "17,3 kWh/100km",
-    descricao:
-      "Mercedes-Benz EQB 300, SUV elétrico compacto com a possibilidade de 7 lugares. Muito baixa quilometragem, ideal para famílias que procuram um elétrico versátil.",
-    destaques: [
-      "Autonomia até 420 km",
-      "Configuração com até 7 lugares",
-      "MBUX com navegação com realidade aumentada",
-      "Carregamento rápido DC",
-    ],
-  },
 ];
 
 export function getCarById(id) {
