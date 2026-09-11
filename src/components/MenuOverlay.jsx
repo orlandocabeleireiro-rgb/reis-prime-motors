@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { siInstagram, siWhatsapp } from "simple-icons";
 import SocialIcon from "./SocialIcon.jsx";
 import { INSTAGRAM_URL, WHATSAPP_URL } from "../data/social.js";
+import { CARS } from "../data/cars.js";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 function MenuLink({ to, title, desc, onClose }) {
@@ -31,6 +32,101 @@ function MenuLink({ to, title, desc, onClose }) {
         <path d="M9 6l6 6-6 6" />
       </svg>
     </NavLink>
+  );
+}
+
+function Chip({ to, onClick, children }) {
+  return (
+    <NavLink
+      to={to}
+      onClick={onClick}
+      className="border border-line px-4 py-2 font-sans text-sm text-cream transition-colors hover:border-silver hover:text-silver"
+    >
+      {children}
+    </NavLink>
+  );
+}
+
+// "Veículos" expande in-line (em vez de navegar de imediato) e mostra
+// atalhos rápidos + a lista de marcas — cada um leva já ao catálogo
+// filtrado (ver Home.jsx, que lê estes parâmetros do URL).
+function VeiculosSection({ onClose }) {
+  const { t } = useLanguage();
+  const [open, setOpen] = useState(false);
+
+  const marcas = useMemo(
+    () => [...new Set(CARS.map((c) => c.marca))].sort((a, b) => a.localeCompare(b)),
+    []
+  );
+
+  return (
+    <div className="border-b border-line">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="group flex w-full items-center justify-between py-6 text-left transition-colors hover:text-silver"
+      >
+        <span>
+          <span className="block font-head text-3xl font-medium text-cream group-hover:text-silver sm:text-4xl">
+            {t("menu.viaturas")}
+          </span>
+          <span className="mt-1.5 block font-sans text-sm text-muted">
+            {t("menu.viaturas_desc")}
+          </span>
+        </span>
+        <svg
+          viewBox="0 0 24 24"
+          className={`h-6 w-6 flex-shrink-0 text-muted transition-transform group-hover:text-silver ${
+            open ? "rotate-90" : ""
+          }`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="pb-7">
+          <div className="flex flex-wrap gap-2.5">
+            <Chip to="/" onClick={onClose}>
+              {t("menu.verTodas")}
+            </Chip>
+            <Chip to={`/?combustivel=${encodeURIComponent("Elétrico")}`} onClick={onClose}>
+              {t("menu.eletricos")}
+            </Chip>
+            <Chip to={`/?combustivel=${encodeURIComponent("Híbrido")}`} onClick={onClose}>
+              {t("menu.hibridos")}
+            </Chip>
+            <Chip to="/?ordenar=recentes" onClick={onClose}>
+              {t("menu.recentes")}
+            </Chip>
+          </div>
+
+          <div className="mt-7">
+            <span className="font-sans text-xs tracking-[0.2em] text-muted">
+              {t("menu.marcas")}
+            </span>
+            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2.5">
+              {marcas.map((m) => (
+                <NavLink
+                  key={m}
+                  to={`/?marca=${encodeURIComponent(m)}`}
+                  onClick={onClose}
+                  className="font-sans text-sm text-muted transition-colors hover:text-cream"
+                >
+                  {m}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -72,7 +168,7 @@ export default function MenuOverlay({ open, onClose }) {
 
       <nav className="flex-1 overflow-y-auto px-6 py-4 sm:px-12">
         <div className="mx-auto max-w-2xl">
-          <MenuLink to="/" title={t("menu.viaturas")} desc={t("menu.viaturas_desc")} onClose={onClose} />
+          <VeiculosSection onClose={onClose} />
           <MenuLink
             to="/contactos"
             title={t("menu.financiamento")}

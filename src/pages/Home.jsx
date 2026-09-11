@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import CarCard from "../components/CarCard.jsx";
 import CarSearch from "../components/CarSearch.jsx";
 import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
@@ -16,11 +16,28 @@ function scrollToResultados() {
 
 export default function Home() {
   const { t, lang } = useLanguage();
+  const [searchParams] = useSearchParams();
   const [marca, setMarca] = useState("Todas");
   const [modelo, setModelo] = useState("Todos");
   const [combustivel, setCombustivel] = useState("Todos");
   const [precoMax, setPrecoMax] = useState(null); // null = sem limite de preço
   const [vista, setVista] = useState("grelha");
+
+  // Atalhos vindos do menu (ex.: /?marca=BMW, /?combustivel=Elétrico,
+  // /?ordenar=recentes) — aplicam o filtro e vão direto aos resultados.
+  const ordenar = searchParams.get("ordenar");
+  useEffect(() => {
+    const m = searchParams.get("marca");
+    const c = searchParams.get("combustivel");
+    const ord = searchParams.get("ordenar");
+    if (!m && !c && !ord) return;
+    setMarca(m ?? "Todas");
+    setModelo("Todos");
+    setCombustivel(c ?? "Todos");
+    setPrecoMax(null);
+    requestAnimationFrame(scrollToResultados);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   const marcas = useMemo(() => [...new Set(CARS.map((c) => c.marca))], []);
   const combustiveis = useMemo(() => [...new Set(CARS.map((c) => c.combustivel))], []);
@@ -44,17 +61,21 @@ export default function Home() {
     [lang]
   );
 
-  const filtrados = useMemo(
-    () =>
-      CARS.filter(
-        (c) =>
-          (marca === "Todas" || c.marca === marca) &&
-          (modelo === "Todos" || c.modelo === modelo) &&
-          (combustivel === "Todos" || c.combustivel === combustivel) &&
-          (precoMax === null || c.preco <= precoMax)
-      ).map((c) => localizeCar(c, lang)),
-    [marca, modelo, combustivel, precoMax, lang]
-  );
+  const filtrados = useMemo(() => {
+    let list = CARS.filter(
+      (c) =>
+        (marca === "Todas" || c.marca === marca) &&
+        (modelo === "Todos" || c.modelo === modelo) &&
+        // startsWith em vez de igualdade estrita: permite ao menu filtrar por
+        // "Híbrido" e apanhar tanto "Híbrido (Gasolina)" como "Híbrido (Diesel)"
+        (combustivel === "Todos" || c.combustivel.startsWith(combustivel)) &&
+        (precoMax === null || c.preco <= precoMax)
+    );
+    if (ordenar === "recentes") {
+      list = [...list].sort((a, b) => b.ano - a.ano || a.km - b.km);
+    }
+    return list.map((c) => localizeCar(c, lang));
+  }, [marca, modelo, combustivel, precoMax, lang, ordenar]);
 
   return (
     <>
