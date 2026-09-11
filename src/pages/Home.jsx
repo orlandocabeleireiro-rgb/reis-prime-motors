@@ -1,14 +1,13 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import CarCard from "../components/CarCard.jsx";
-import BrandIcon from "../components/BrandIcon.jsx";
-import FuelIcon from "../components/FuelIcon.jsx";
+import CarSearch from "../components/CarSearch.jsx";
 import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
 import CarCarousel from "../components/CarCarousel.jsx";
 import { CARS } from "../data/cars.js";
 
-const PRECO_MIN = 10000;
 const PRECO_MAX = 100000;
+const PRECO_OPCOES = [20000, 40000, 60000, 80000, PRECO_MAX];
 
 export default function Home() {
   const [marca, setMarca] = useState("Todas");
@@ -16,11 +15,8 @@ export default function Home() {
   const [precoMax, setPrecoMax] = useState(PRECO_MAX);
   const [vista, setVista] = useState("grelha");
 
-  const marcas = useMemo(() => ["Todas", ...new Set(CARS.map((c) => c.marca))], []);
-  const combustiveis = useMemo(
-    () => ["Todos", ...new Set(CARS.map((c) => c.combustivel))],
-    []
-  );
+  const marcas = useMemo(() => [...new Set(CARS.map((c) => c.marca))], []);
+  const combustiveis = useMemo(() => [...new Set(CARS.map((c) => c.combustivel))], []);
 
   const destaques = useMemo(
     () => [...CARS].sort((a, b) => b.preco - a.preco).slice(0, 5),
@@ -41,7 +37,7 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="grid gap-10 bg-ink px-6 py-16 text-cream sm:px-12 sm:py-20 lg:grid-cols-[1.3fr_1fr] lg:items-center lg:gap-10 lg:py-[90px]">
+      <section className="grid gap-10 bg-ink px-6 py-16 text-cream sm:px-12 sm:py-20 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-10 lg:py-[90px]">
         <div>
           <h1 className="max-w-[640px] font-head text-4xl font-medium leading-[1.05] text-cream sm:text-5xl lg:text-[40px]">
             Escolhidos com rigor.
@@ -126,69 +122,27 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mb-9 flex flex-col gap-5">
-          <div>
-            <div className="mb-2 font-sans text-[11px] uppercase tracking-wide text-paper-muted/70">
-              Marca
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {marcas.map((m) => (
-                <button
-                  key={m}
-                  onClick={() => setMarca(m)}
-                  className={`flex items-center gap-2 border px-4 py-2 font-sans text-[13px] transition-colors ${
-                    marca === m
-                      ? "border-ink bg-ink text-white"
-                      : "border-paper-line text-paper-muted hover:border-paper-text hover:text-paper-text"
-                  }`}
-                >
-                  <BrandIcon marca={m} className="h-5 w-5 flex-shrink-0" />
-                  {m}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-end gap-7">
-            <div>
-              <div className="mb-2 font-sans text-[11px] uppercase tracking-wide text-paper-muted/70">
-                Combustível
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {combustiveis.map((c) => (
-                  <button
-                    key={c}
-                    onClick={() => setCombustivel(c)}
-                    className={`flex items-center gap-2 border px-4 py-2 font-sans text-[13px] transition-colors ${
-                      combustivel === c
-                        ? "border-ink bg-ink text-white"
-                        : "border-paper-line text-paper-muted hover:border-paper-text hover:text-paper-text"
-                    }`}
-                  >
-                    <FuelIcon combustivel={c === "Todos" ? null : c} className="h-4 w-4 flex-shrink-0" />
-                    {c}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="ml-auto flex items-center gap-3">
-              <span className="font-sans text-[13px] text-paper-muted">
-                Até {precoMax.toLocaleString("pt-PT")} €
-              </span>
-              <input
-                type="range"
-                min={PRECO_MIN}
-                max={PRECO_MAX}
-                step="5000"
-                value={precoMax}
-                onChange={(e) => setPrecoMax(Number(e.target.value))}
-                className="w-40 accent-silver"
-              />
-            </div>
-          </div>
+        <div className="mb-10">
+          <CarSearch
+            marcas={marcas}
+            marca={marca}
+            setMarca={setMarca}
+            combustiveis={combustiveis}
+            combustivel={combustivel}
+            setCombustivel={setCombustivel}
+            precoMax={precoMax}
+            setPrecoMax={setPrecoMax}
+            precoOpcoes={PRECO_OPCOES}
+            resultCount={filtrados.length}
+            onSearch={() =>
+              document
+                .getElementById("resultados")
+                ?.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+          />
         </div>
 
+        <div id="resultados" />
         {filtrados.length > 0 ? (
           vista === "grelha" ? (
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

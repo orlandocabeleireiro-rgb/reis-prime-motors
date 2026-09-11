@@ -111,12 +111,12 @@ export default function FeaturedCarousel({ cars }) {
               to={`/carros/${car.id}`}
               onClick={handleSlideClick}
               draggable={false}
-              className="block w-full flex-shrink-0 px-7 pb-7 pt-5"
+              className="block w-full flex-shrink-0 px-8 pb-8 pt-6"
             >
               <CarImage
                 car={car}
                 theme="dark"
-                className="aspect-[16/9]"
+                className="aspect-[4/3]"
                 overlayClassName="flex items-end p-4"
               >
                 <span className="font-sans text-xs tracking-wide text-muted">{car.ano}</span>

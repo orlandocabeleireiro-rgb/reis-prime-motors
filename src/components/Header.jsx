@@ -1,4 +1,7 @@
 import { NavLink } from "react-router-dom";
+import { siInstagram, siWhatsapp } from "simple-icons";
+import SocialIcon from "./SocialIcon.jsx";
+import { INSTAGRAM_URL, WHATSAPP_URL } from "../data/social.js";
 
 const navLinkClass = ({ isActive }) =>
   `transition-colors hover:text-paper-text ${
@@ -23,6 +26,26 @@ export default function Header() {
         <NavLink to="/contactos" className={navLinkClass}>
           Contactos
         </NavLink>
+        <span className="flex items-center gap-4 border-l border-paper-line pl-6">
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="text-paper-muted transition-colors hover:text-paper-text"
+          >
+            <SocialIcon icon={siInstagram} className="h-4 w-4" />
+          </a>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            className="text-paper-muted transition-colors hover:text-paper-text"
+          >
+            <SocialIcon icon={siWhatsapp} className="h-4 w-4" />
+          </a>
+        </span>
       </nav>
     </header>
   );
