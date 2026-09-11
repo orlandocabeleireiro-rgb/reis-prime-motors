@@ -24,26 +24,6 @@ export default function Footer() {
             REIS <span className="text-silver">PRIME MOTORS</span>
           </div>
           <p className="mt-2 text-muted">Gondomar, Porto</p>
-          <div className="mt-4 flex items-center gap-4">
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="text-muted transition-colors hover:text-cream"
-            >
-              <SocialIcon icon={siInstagram} />
-            </a>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp"
-              className="text-muted transition-colors hover:text-cream"
-            >
-              <SocialIcon icon={siWhatsapp} />
-            </a>
-          </div>
         </div>
         <div className="flex flex-col gap-1 sm:items-end">
           <a href="mailto:geral@reisprimemotors.pt" className="hover:text-cream">
@@ -57,7 +37,27 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-      <div className="mt-8 border-t border-line pt-6 text-xs text-muted/70">
+      <div className="mt-8 flex items-center justify-center gap-5">
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          className="text-muted transition-colors hover:text-cream"
+        >
+          <SocialIcon icon={siInstagram} />
+        </a>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+          className="text-muted transition-colors hover:text-cream"
+        >
+          <SocialIcon icon={siWhatsapp} />
+        </a>
+      </div>
+      <div className="mt-6 border-t border-line pt-6 text-xs text-muted/70">
         © {new Date().getFullYear()} Reis Prime Motors. Todos os direitos reservados.
       </div>
     </footer>

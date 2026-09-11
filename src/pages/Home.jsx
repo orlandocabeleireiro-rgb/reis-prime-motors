@@ -27,16 +27,16 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="grid gap-10 bg-ink px-6 py-16 text-cream sm:px-12 sm:py-20 lg:grid-cols-[1.3fr_1fr] lg:gap-10 lg:py-[90px]">
+      <section className="grid gap-10 bg-ink px-6 py-16 text-cream sm:px-12 sm:py-20 lg:grid-cols-[1.3fr_1fr] lg:items-center lg:gap-10 lg:py-[90px]">
         <div>
-          <h1 className="max-w-[560px] font-head text-4xl font-medium leading-[1.05] text-cream sm:text-5xl lg:text-[56px]">
-            Carros com história.
+          <h1 className="max-w-[640px] font-head text-4xl font-medium leading-[1.05] text-cream sm:text-5xl lg:text-[40px]">
+            Escolhidos com rigor.
             <br />
-            Escolhidos a rigor.
+            Conduzidos com confiança.
           </h1>
           <p className="mt-5 max-w-[460px] font-sans text-base leading-[1.7] text-muted">
-            Em Gondomar, selecionamos cada viatura usada com inspeção própria antes de chegar até
-            si — sem surpresas, sem pressa.
+            Selecionamos cada viatura com atenção ao detalhe, procurando qualidade, transparência
+            e confiança em cada escolha.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a

@@ -2,10 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const INTERVAL_MS = 5000;
+const DRAG_THRESHOLD_PX = 60;
+const CLICK_SUPPRESS_PX = 8;
 
 export default function FeaturedCarousel({ cars }) {
   const [index, setIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [dragging, setDragging] = useState(false);
   const pausedRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragOffsetRef = useRef(0);
+  const draggedRef = useRef(false);
 
   useEffect(() => {
     if (cars.length <= 1) return;
@@ -17,7 +24,60 @@ export default function FeaturedCarousel({ cars }) {
     return () => clearInterval(id);
   }, [cars.length]);
 
+  // Arrasto: usa listeners no window (em vez de pointer capture no
+  // elemento) para não desviar o evento de "click" do link de cada slide.
+  useEffect(() => {
+    if (!dragging) return;
+
+    const handleMove = (e) => {
+      const delta = e.clientX - dragStartXRef.current;
+      if (Math.abs(delta) > CLICK_SUPPRESS_PX) draggedRef.current = true;
+      dragOffsetRef.current = delta;
+      setDragOffset(delta);
+    };
+
+    const handleUp = () => {
+      const delta = dragOffsetRef.current;
+      if (delta <= -DRAG_THRESHOLD_PX) {
+        setIndex((i) => (i + 1) % cars.length);
+      } else if (delta >= DRAG_THRESHOLD_PX) {
+        setIndex((i) => (i - 1 + cars.length) % cars.length);
+      }
+      setDragging(false);
+      setDragOffset(0);
+      dragOffsetRef.current = 0;
+      pausedRef.current = false;
+    };
+
+    window.addEventListener("pointermove", handleMove);
+    window.addEventListener("pointerup", handleUp);
+    window.addEventListener("pointercancel", handleUp);
+    return () => {
+      window.removeEventListener("pointermove", handleMove);
+      window.removeEventListener("pointerup", handleUp);
+      window.removeEventListener("pointercancel", handleUp);
+    };
+  }, [dragging, cars.length]);
+
   if (cars.length === 0) return null;
+
+  const goTo = (i) => setIndex((i + cars.length) % cars.length);
+
+  function handlePointerDown(e) {
+    if (cars.length <= 1) return;
+    dragStartXRef.current = e.clientX;
+    dragOffsetRef.current = 0;
+    draggedRef.current = false;
+    pausedRef.current = true;
+    setDragging(true);
+  }
+
+  function handleSlideClick(e) {
+    if (draggedRef.current) {
+      e.preventDefault();
+      draggedRef.current = false;
+    }
+  }
 
   return (
     <div
@@ -26,7 +86,7 @@ export default function FeaturedCarousel({ cars }) {
         pausedRef.current = true;
       }}
       onMouseLeave={() => {
-        pausedRef.current = false;
+        pausedRef.current = dragging ? pausedRef.current : false;
       }}
     >
       <div className="flex items-center justify-between px-7 pt-6">
@@ -36,15 +96,20 @@ export default function FeaturedCarousel({ cars }) {
         </span>
       </div>
 
-      <div className="overflow-hidden">
+      <div
+        className="touch-pan-y select-none overflow-hidden"
+        onPointerDown={handlePointerDown}
+      >
         <div
-          className="flex transition-transform duration-700 ease-out"
-          style={{ transform: `translateX(-${index * 100}%)` }}
+          className={`flex ${dragging ? "" : "transition-transform duration-700 ease-out"}`}
+          style={{ transform: `translateX(calc(-${index * 100}% + ${dragOffset}px))` }}
         >
           {cars.map((car) => (
             <Link
               key={car.id}
               to={`/carros/${car.id}`}
+              onClick={handleSlideClick}
+              draggable={false}
               className="block w-full flex-shrink-0 px-7 pb-7 pt-5"
             >
               <div
@@ -75,7 +140,7 @@ export default function FeaturedCarousel({ cars }) {
           {cars.map((car, i) => (
             <button
               key={car.id}
-              onClick={() => setIndex(i)}
+              onClick={() => goTo(i)}
               aria-label={`Ver ${car.marca} ${car.modelo}`}
               className={`h-1.5 w-1.5 rounded-full transition-colors ${
                 i === index ? "bg-silver" : "bg-line"

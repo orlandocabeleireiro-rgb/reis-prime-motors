@@ -14,11 +14,26 @@ import {
   siCitroen,
   siVolvo,
   siPolestar,
+  siMini,
 } from "simple-icons";
 
-// Nem todas as marcas têm símbolo disponível na biblioteca Simple Icons
-// (ex.: Mercedes-Benz e BYD) — nesses casos usamos um pequeno emblema
-// genérico com as iniciais da marca, no mesmo estilo visual dos restantes.
+// Mercedes-Benz e BYD não estão disponíveis na biblioteca Simple Icons —
+// usamos o símbolo oficial de cada uma (imagem fornecida à parte), recortado
+// como máscara para herdar a mesma cor (currentColor) dos restantes
+// símbolos e manter tudo visualmente uniforme.
+const MASK_ICONS = {
+  "Mercedes-Benz": "/brands/mercedes-benz.png",
+  BYD: "/brands/byd.png",
+};
+
+// Estas marcas também não têm símbolo disponível — nesses casos usamos um
+// pequeno emblema genérico com as iniciais da marca.
+const INITIALS = {
+  Jaguar: "JAG",
+  Cupra: "CUP",
+  Mustang: "GT",
+};
+
 const ICONS = {
   BMW: siBmw,
   Audi: siAudi,
@@ -35,14 +50,31 @@ const ICONS = {
   "Citroën": siCitroen,
   Volvo: siVolvo,
   Polestar: siPolestar,
-};
-
-const INITIALS = {
-  "Mercedes-Benz": "MB",
-  BYD: "BYD",
+  Mini: siMini,
 };
 
 export default function BrandIcon({ marca, className = "h-4 w-4" }) {
+  const maskSrc = MASK_ICONS[marca];
+  if (maskSrc) {
+    return (
+      <span
+        role="img"
+        aria-label={marca}
+        className={`${className} inline-block flex-shrink-0 bg-current`}
+        style={{
+          WebkitMaskImage: `url(${maskSrc})`,
+          maskImage: `url(${maskSrc})`,
+          WebkitMaskSize: "contain",
+          maskSize: "contain",
+          WebkitMaskRepeat: "no-repeat",
+          maskRepeat: "no-repeat",
+          WebkitMaskPosition: "center",
+          maskPosition: "center",
+        }}
+      />
+    );
+  }
+
   const icon = ICONS[marca];
   if (icon) {
     return (
