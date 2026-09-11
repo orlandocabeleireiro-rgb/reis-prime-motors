@@ -2,19 +2,22 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import CarCard from "../components/CarCard.jsx";
 import BrandIcon from "../components/BrandIcon.jsx";
+import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
 import { CARS } from "../data/cars.js";
 
-const STATS = [
-  ["Viaturas disponíveis", String(CARS.length)],
-  ["Anos de experiência", "12"],
-  ["Garantia em todas as viaturas", "12 meses"],
-];
+const PRECO_MIN = 10000;
+const PRECO_MAX = 100000;
 
 export default function Home() {
   const [marca, setMarca] = useState("Todas");
-  const [precoMax, setPrecoMax] = useState(40000);
+  const [precoMax, setPrecoMax] = useState(PRECO_MAX);
 
   const marcas = useMemo(() => ["Todas", ...new Set(CARS.map((c) => c.marca))], []);
+
+  const destaques = useMemo(
+    () => [...CARS].sort((a, b) => b.preco - a.preco).slice(0, 5),
+    []
+  );
 
   const filtrados = useMemo(
     () => CARS.filter((c) => (marca === "Todas" || c.marca === marca) && c.preco <= precoMax),
@@ -50,18 +53,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className="self-start border border-line bg-surface p-7">
-          <div className="mb-4.5 font-sans text-xs tracking-wide text-silver">Em números</div>
-          {STATS.map(([label, val]) => (
-            <div
-              key={label}
-              className="flex justify-between border-t border-line py-3.5 font-sans"
-            >
-              <span className="text-sm text-muted">{label}</span>
-              <span className="text-sm text-cream">{val}</span>
-            </div>
-          ))}
-        </div>
+        <FeaturedCarousel cars={destaques} />
       </section>
 
       {/* Catálogo */}
@@ -98,9 +90,9 @@ export default function Home() {
             </span>
             <input
               type="range"
-              min="10000"
-              max="40000"
-              step="1000"
+              min={PRECO_MIN}
+              max={PRECO_MAX}
+              step="5000"
               value={precoMax}
               onChange={(e) => setPrecoMax(Number(e.target.value))}
               className="w-40 accent-silver"

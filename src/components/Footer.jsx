@@ -1,4 +1,19 @@
 import { Link } from "react-router-dom";
+import { siInstagram, siWhatsapp } from "simple-icons";
+
+// TODO: substituir por "https://instagram.com/<utilizador>" assim que a
+// conta do Instagram for criada.
+const INSTAGRAM_URL = "#";
+const WHATSAPP_URL = "https://wa.me/351220000000";
+
+function SocialIcon({ icon }) {
+  return (
+    <svg role="img" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+      <title>{icon.title}</title>
+      <path d={icon.path} />
+    </svg>
+  );
+}
 
 export default function Footer() {
   return (
@@ -9,6 +24,26 @@ export default function Footer() {
             REIS <span className="text-silver">PRIME MOTORS</span>
           </div>
           <p className="mt-2 text-muted">Gondomar, Porto</p>
+          <div className="mt-4 flex items-center gap-4">
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="text-muted transition-colors hover:text-cream"
+            >
+              <SocialIcon icon={siInstagram} />
+            </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="text-muted transition-colors hover:text-cream"
+            >
+              <SocialIcon icon={siWhatsapp} />
+            </a>
+          </div>
         </div>
         <div className="flex flex-col gap-1 sm:items-end">
           <a href="mailto:geral@reisprimemotors.pt" className="hover:text-cream">
