@@ -11,3 +11,27 @@
     @apply bg-paper text-paper-text font-sans antialiased;
   }
 }
+
+/* Fila de logótipos de marcas a deslizar lentamente (pesquisa de viaturas) */
+@keyframes marcas-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marcas-marquee-track {
+  animation: marcas-marquee 45s linear infinite;
+}
+
+.marcas-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marcas-marquee-track {
+    animation: none;
+  }
+}

@@ -9,14 +9,33 @@ import { CARS } from "../data/cars.js";
 const PRECO_MAX = 100000;
 const PRECO_OPCOES = [20000, 40000, 60000, 80000, PRECO_MAX];
 
+function scrollToResultados() {
+  document.getElementById("resultados")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 export default function Home() {
   const [marca, setMarca] = useState("Todas");
+  const [modelo, setModelo] = useState("Todos");
   const [combustivel, setCombustivel] = useState("Todos");
   const [precoMax, setPrecoMax] = useState(PRECO_MAX);
   const [vista, setVista] = useState("grelha");
 
   const marcas = useMemo(() => [...new Set(CARS.map((c) => c.marca))], []);
   const combustiveis = useMemo(() => [...new Set(CARS.map((c) => c.combustivel))], []);
+  const modelos = useMemo(
+    () => [
+      ...new Set(
+        CARS.filter((c) => marca === "Todas" || c.marca === marca).map((c) => c.modelo)
+      ),
+    ],
+    [marca]
+  );
+
+  function handleSelectMarca(m, { scroll = true } = {}) {
+    setMarca(m);
+    setModelo("Todos");
+    if (scroll) scrollToResultados();
+  }
 
   const destaques = useMemo(
     () => [...CARS].sort((a, b) => b.preco - a.preco).slice(0, 5),
@@ -28,10 +47,11 @@ export default function Home() {
       CARS.filter(
         (c) =>
           (marca === "Todas" || c.marca === marca) &&
+          (modelo === "Todos" || c.modelo === modelo) &&
           (combustivel === "Todos" || c.combustivel === combustivel) &&
           c.preco <= precoMax
       ),
-    [marca, combustivel, precoMax]
+    [marca, modelo, combustivel, precoMax]
   );
 
   return (
@@ -126,7 +146,10 @@ export default function Home() {
           <CarSearch
             marcas={marcas}
             marca={marca}
-            setMarca={setMarca}
+            onSelectMarca={handleSelectMarca}
+            modelos={modelos}
+            modelo={modelo}
+            setModelo={setModelo}
             combustiveis={combustiveis}
             combustivel={combustivel}
             setCombustivel={setCombustivel}
@@ -134,11 +157,7 @@ export default function Home() {
             setPrecoMax={setPrecoMax}
             precoOpcoes={PRECO_OPCOES}
             resultCount={filtrados.length}
-            onSearch={() =>
-              document
-                .getElementById("resultados")
-                ?.scrollIntoView({ behavior: "smooth", block: "start" })
-            }
+            onSearch={scrollToResultados}
           />
         </div>
 

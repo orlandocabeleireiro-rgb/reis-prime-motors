@@ -4,7 +4,10 @@ import SelectField from "./SelectField.jsx";
 export default function CarSearch({
   marcas,
   marca,
-  setMarca,
+  onSelectMarca,
+  modelos,
+  modelo,
+  setModelo,
   combustiveis,
   combustivel,
   setCombustivel,
@@ -16,25 +19,27 @@ export default function CarSearch({
 }) {
   return (
     <div className="border border-paper-line bg-white p-6 sm:p-8">
-      {/* Marcas — atalho visual, clica para filtrar diretamente */}
-      <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
-        {marcas.map((m) => (
-          <button
-            key={m}
-            onClick={() => setMarca(marca === m ? "Todas" : m)}
-            title={m}
-            className={`flex flex-col items-center gap-1.5 text-paper-muted transition-colors hover:text-paper-text ${
-              marca === m ? "text-paper-text" : ""
-            }`}
-          >
-            <BrandIcon marca={m} className="h-7 w-7" />
-            <span
-              className={`h-0.5 w-5 transition-colors ${
-                marca === m ? "bg-silver" : "bg-transparent"
+      {/* Marcas — fila a deslizar sozinha; clicar filtra e vai aos resultados */}
+      <div className="overflow-hidden">
+        <div className="marcas-marquee-track flex w-max items-center gap-10">
+          {[...marcas, ...marcas].map((m, i) => (
+            <button
+              key={`${m}-${i}`}
+              onClick={() => onSelectMarca(m)}
+              title={m}
+              className={`flex flex-shrink-0 flex-col items-center gap-2 text-paper-muted transition-colors hover:text-paper-text ${
+                marca === m ? "text-paper-text" : ""
               }`}
-            />
-          </button>
-        ))}
+            >
+              <BrandIcon marca={m} className="h-9 w-9" />
+              <span
+                className={`h-0.5 w-6 transition-colors ${
+                  marca === m ? "bg-silver" : "bg-transparent"
+                }`}
+              />
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="mt-7 border-t border-paper-line pt-7">
@@ -42,14 +47,23 @@ export default function CarSearch({
           Pesquisa de viaturas
         </div>
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:flex-wrap">
           <SelectField
             label="Marca"
             value={marca}
-            onChange={(e) => setMarca(e.target.value)}
+            onChange={(e) => onSelectMarca(e.target.value, { scroll: false })}
             options={[
               { value: "Todas", label: "Todas as marcas" },
               ...marcas.map((m) => ({ value: m, label: m })),
+            ]}
+          />
+          <SelectField
+            label="Modelo"
+            value={modelo}
+            onChange={(e) => setModelo(e.target.value)}
+            options={[
+              { value: "Todos", label: "Todos os modelos" },
+              ...modelos.map((m) => ({ value: m, label: m })),
             ]}
           />
           <SelectField
