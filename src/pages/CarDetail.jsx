@@ -1,0 +1,127 @@
+import { useParams, Link, Navigate } from "react-router-dom";
+import { getCarById } from "../data/cars.js";
+
+const SPEC_ROWS = (car) => [
+  ["Marca", car.marca],
+  ["Modelo", car.modelo],
+  ["Ano", car.ano],
+  ["Quilometragem", `${car.km.toLocaleString("pt-PT")} km`],
+  ["Combustível", car.combustivel],
+  ["Transmissão", car.transmissao],
+  ["Potência", `${car.potencia} cv`],
+  ["Consumo médio", car.consumo],
+  ["Cor", car.cor],
+  ["Portas", car.portas],
+];
+
+export default function CarDetail() {
+  const { id } = useParams();
+  const car = getCarById(id);
+
+  if (!car) {
+    return <Navigate to="/404" replace />;
+  }
+
+  return (
+    <>
+      <div className="border-b border-paper-line bg-white px-6 py-4 sm:px-12">
+        <Link to="/" className="font-sans text-sm text-paper-muted hover:text-paper-text">
+          ← Voltar às viaturas
+        </Link>
+      </div>
+
+      <section className="grid gap-10 px-6 py-10 sm:px-12 sm:py-14 lg:grid-cols-[1.4fr_1fr]">
+        {/* Galeria (placeholder) */}
+        <div>
+          <div
+            className="flex aspect-[16/10] items-end justify-between p-6"
+            style={{
+              background:
+                "repeating-linear-gradient(135deg, #ececea, #ececea 10px, #e2e2df 10px, #e2e2df 20px)",
+            }}
+          >
+            <span className="font-sans text-xs tracking-wide text-paper-muted">
+              {car.marca} {car.modelo}
+            </span>
+            <span className="font-sans text-xs tracking-wide text-paper-muted">{car.ano}</span>
+          </div>
+          <div className="mt-2 grid grid-cols-3 gap-2">
+            {[1, 2, 3].map((n) => (
+              <div
+                key={n}
+                className="aspect-[4/3]"
+                style={{
+                  background:
+                    "repeating-linear-gradient(135deg, #ececea, #ececea 10px, #e2e2df 10px, #e2e2df 20px)",
+                }}
+              />
+            ))}
+          </div>
+
+          <div className="mt-10">
+            <h2 className="font-head text-xl font-medium text-paper-text">Descrição</h2>
+            <p className="mt-3 max-w-2xl font-sans text-[15px] leading-[1.75] text-paper-muted">
+              {car.descricao}
+            </p>
+          </div>
+
+          <div className="mt-10">
+            <h2 className="font-head text-xl font-medium text-paper-text">Destaques</h2>
+            <ul className="mt-3 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
+              {car.destaques.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-2 font-sans text-[14px] text-paper-muted"
+                >
+                  <span className="mt-2 h-1 w-1 flex-shrink-0 bg-silver" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Ficha técnica + CTA */}
+        <div className="lg:self-start">
+          <div className="border border-paper-line bg-white p-6">
+            <div className="font-sans text-xs font-medium tracking-wide text-silver">
+              {car.marca}
+            </div>
+            <h1 className="mt-1 font-head text-2xl font-medium text-paper-text">{car.modelo}</h1>
+            <div className="mt-4 font-head text-3xl text-paper-text">
+              {car.preco.toLocaleString("pt-PT")} €
+            </div>
+
+            <div className="mt-6 flex flex-col gap-2.5">
+              <Link
+                to="/contactos"
+                className="bg-ink px-5 py-3.5 text-center font-sans text-sm font-medium text-white transition-opacity hover:opacity-85"
+              >
+                Tenho interesse — contactar
+              </Link>
+              <a
+                href="tel:+351220000000"
+                className="border border-paper-line px-5 py-3.5 text-center font-sans text-sm text-paper-text transition-colors hover:border-paper-text"
+              >
+                Ligar: 220 000 000
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-6 border border-line bg-ink p-6">
+            <div className="mb-1 font-sans text-xs tracking-wide text-silver">Ficha técnica</div>
+            {SPEC_ROWS(car).map(([label, val]) => (
+              <div
+                key={label}
+                className="flex justify-between border-t border-line py-3 font-sans"
+              >
+                <span className="text-sm text-muted">{label}</span>
+                <span className="text-sm text-cream">{val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
