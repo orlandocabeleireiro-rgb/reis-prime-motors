@@ -2,12 +2,14 @@ import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher.jsx";
 import MenuOverlay from "./MenuOverlay.jsx";
+import AccountModal from "./AccountModal.jsx";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 // Na página inicial o cabeçalho fica sobreposto ao vídeo do hero (sem
 // fundo, texto claro); nas restantes páginas é o cabeçalho sólido normal.
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
   const { t } = useLanguage();
   const { pathname } = useLocation();
   const overlay = pathname === "/";
@@ -67,6 +69,7 @@ export default function Header() {
         <div className="flex items-center gap-4">
           <LanguageSwitcher overlay={overlay} />
           <button
+            onClick={() => setAccountOpen(true)}
             aria-label={t("header.account")}
             title={t("header.account")}
             className={`flex h-7 w-7 items-center justify-center transition-opacity ${
@@ -93,6 +96,7 @@ export default function Header() {
       </header>
 
       <MenuOverlay open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <AccountModal open={accountOpen} onClose={() => setAccountOpen(false)} />
     </>
   );
 }

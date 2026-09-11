@@ -826,6 +826,70 @@ const TRANSLATIONS = {
       ],
     },
   },
+  29: {
+    es: {
+      descricao:
+        "Ford Mustang Mach-E, SUV 100% eléctrico con el ADN deportivo Mustang. Prácticamente nuevo, combina espacio y tecnología con un diseño atrevido.",
+      destaques: [
+        "Motor eléctrico eficiente",
+        'Pantalla central de 15,5" en vertical',
+        "Ford Co-Pilot360 (asistentes de conducción)",
+        "Carga rápida DC",
+      ],
+    },
+    en: {
+      descricao:
+        'Ford Mustang Mach-E, a fully electric SUV with the sporty Mustang DNA. Practically brand new, combining space and technology with bold design.',
+      destaques: [
+        "Efficient electric motor",
+        '15.5" vertical central touchscreen',
+        "Ford Co-Pilot360 (driving assistants)",
+        "DC fast charging",
+      ],
+    },
+    fr: {
+      descricao:
+        "Ford Mustang Mach-E, SUV 100% électrique avec l'ADN sportif Mustang. Pratiquement neuf, il allie espace et technologie à un design audacieux.",
+      destaques: [
+        "Moteur électrique efficace",
+        'Écran central de 15,5" à la verticale',
+        "Ford Co-Pilot360 (assistants de conduite)",
+        "Charge rapide DC",
+      ],
+    },
+  },
+  30: {
+    es: {
+      descricao:
+        'Tesla Model 3 con el diseño más reciente ("Highland"), prácticamente nuevo. Interior renovado, más silencioso y con acabados revisados.',
+      destaques: [
+        "Diseño exterior e interior renovados",
+        "Pantalla trasera para los pasajeros",
+        "Piloto automático incluido",
+        "Acceso a la red de cargadores Supercharger",
+      ],
+    },
+    en: {
+      descricao:
+        'Tesla Model 3 with the latest ("Highland") design, practically brand new. Refreshed interior, quieter and with revised finishes.',
+      destaques: [
+        "Refreshed exterior and interior design",
+        "Rear screen for passengers",
+        "Autopilot included",
+        "Access to the Supercharger network",
+      ],
+    },
+    fr: {
+      descricao:
+        'Tesla Model 3 dans son design le plus récent ("Highland"), pratiquement neuve. Intérieur renouvelé, plus silencieux et aux finitions revues.',
+      destaques: [
+        "Design extérieur et intérieur renouvelé",
+        "Écran arrière pour les passagers",
+        "Pilote automatique inclus",
+        "Accès au réseau de chargeurs Supercharger",
+      ],
+    },
+  },
 };
 
 export default TRANSLATIONS;

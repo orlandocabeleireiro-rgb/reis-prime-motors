@@ -53,6 +53,7 @@ export const COR_MAP = {
   "Preto Obsidiana": { es: "Negro Obsidiana", en: "Obsidian Black", fr: "Noir Obsidienne" },
   "Prateado GT": { es: "Plateado GT", en: "GT Silver", fr: "Argent GT" },
   "Cinzento GT Silver": { es: "Gris GT Silver", en: "GT Silver Grey", fr: "Gris GT Silver" },
+  "Vermelho Rapid Red": { es: "Rojo Rapid Red", en: "Rapid Red", fr: "Rouge Rapid Red" },
 };
 
 export function translateVocab(map, value, lang) {

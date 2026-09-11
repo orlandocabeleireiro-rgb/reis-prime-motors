@@ -563,6 +563,52 @@ export const CARS = [
       "Bancos desportivos em pele",
     ],
   },
+  {
+    id: 29,
+    marca: "Ford",
+    modelo: "Mustang Mach-E",
+    imagem: "/cars/ford-mustang-mach-e.png",
+    ano: 2023,
+    km: 9000,
+    preco: 46900,
+    combustivel: "Elétrico",
+    transmissao: "Automática",
+    cor: "Vermelho Rapid Red",
+    portas: 5,
+    potencia: 269,
+    consumo: "17,5 kWh/100km",
+    descricao:
+      "Ford Mustang Mach-E, SUV 100% elétrico com o ADN desportivo Mustang. Praticamente novo, junta espaço e tecnologia a um design arrojado.",
+    destaques: [
+      "Motor elétrico eficiente",
+      'Ecrã central de 15,5" na vertical',
+      "Ford Co-Pilot360 (assistentes de condução)",
+      "Carregamento rápido DC",
+    ],
+  },
+  {
+    id: 30,
+    marca: "Tesla",
+    modelo: "Model 3",
+    imagem: "/cars/tesla-model-3.png",
+    ano: 2024,
+    km: 3000,
+    preco: 39900,
+    combustivel: "Elétrico",
+    transmissao: "Automática",
+    cor: "Branco Pérola",
+    portas: 4,
+    potencia: 283,
+    consumo: "13,9 kWh/100km",
+    descricao:
+      'Tesla Model 3 no design mais recente ("Highland"), praticamente novo. Interior renovado, mais silencioso e com acabamentos revistos.',
+    destaques: [
+      "Design exterior e interior renovados",
+      "Ecrã traseiro para os passageiros",
+      "Piloto automático incluído",
+      "Acesso à rede de carregadores Supercharger",
+    ],
+  },
 ];
 
 export function getCarById(id) {
