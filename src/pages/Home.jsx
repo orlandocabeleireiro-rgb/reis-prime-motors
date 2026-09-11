@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import CarCard from "../components/CarCard.jsx";
+import BrandIcon from "../components/BrandIcon.jsx";
 import { CARS } from "../data/cars.js";
 
 const STATS = [
@@ -80,12 +81,13 @@ export default function Home() {
               <button
                 key={m}
                 onClick={() => setMarca(m)}
-                className={`border px-4 py-2 font-sans text-[13px] transition-colors ${
+                className={`flex items-center gap-2 border px-4 py-2 font-sans text-[13px] transition-colors ${
                   marca === m
                     ? "border-ink bg-ink text-white"
                     : "border-paper-line text-paper-muted hover:border-paper-text hover:text-paper-text"
                 }`}
               >
+                <BrandIcon marca={m} className="h-4 w-4 flex-shrink-0" />
                 {m}
               </button>
             ))}
