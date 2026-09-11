@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between border-b border-paper-line bg-white px-6 py-5 sm:px-12">
       <NavLink to="/" className="flex items-center gap-3">
-        <img src="/reis-mark-white.png" alt="Reis Prime Motors" className="block h-4 w-auto" />
+        <img src="/reis-mark.png" alt="Reis Prime Motors" className="block h-4 w-auto" />
         <span className="hidden font-sans text-[13px] font-normal tracking-[0.3em] text-silver min-[350px]:inline">
           PRIME MOTORS
         </span>
