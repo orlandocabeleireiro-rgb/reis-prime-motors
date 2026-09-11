@@ -165,6 +165,7 @@ export const CARS = [
     id: 8,
     marca: "Porsche",
     modelo: "911 Carrera",
+    imagem: "/cars/porsche-911-carrera.png",
     ano: 2019,
     km: 38000,
     preco: 89900,

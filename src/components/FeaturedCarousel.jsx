@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import CarImage from "./CarImage.jsx";
 
 const INTERVAL_MS = 5000;
 const DRAG_THRESHOLD_PX = 60;
@@ -112,15 +113,14 @@ export default function FeaturedCarousel({ cars }) {
               draggable={false}
               className="block w-full flex-shrink-0 px-7 pb-7 pt-5"
             >
-              <div
-                className="flex aspect-[16/9] items-end p-4"
-                style={{
-                  background:
-                    "repeating-linear-gradient(135deg, #232323, #232323 10px, #1c1c1c 10px, #1c1c1c 20px)",
-                }}
+              <CarImage
+                car={car}
+                theme="dark"
+                className="aspect-[16/9]"
+                overlayClassName="flex items-end p-4"
               >
                 <span className="font-sans text-xs tracking-wide text-muted">{car.ano}</span>
-              </div>
+              </CarImage>
               <div className="mt-4 flex items-start justify-between gap-4">
                 <div>
                   <div className="font-sans text-xs font-medium text-silver">{car.marca}</div>

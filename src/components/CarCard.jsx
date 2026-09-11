@@ -1,17 +1,12 @@
 import { Link } from "react-router-dom";
+import CarImage from "./CarImage.jsx";
 
 export default function CarCard({ car }) {
   return (
     <div className="flex flex-col border border-paper-line bg-white">
-      <div
-        className="flex aspect-[16/10] items-end p-3.5"
-        style={{
-          background:
-            "repeating-linear-gradient(135deg, #ececea, #ececea 10px, #e2e2df 10px, #e2e2df 20px)",
-        }}
-      >
+      <CarImage car={car} className="aspect-[16/10]" overlayClassName="flex items-end p-3.5">
         <span className="font-sans text-xs tracking-wide text-paper-muted">{car.ano}</span>
-      </div>
+      </CarImage>
       <div className="flex flex-1 flex-col p-4 pb-5 sm:p-[18px] sm:pb-5">
         <div className="mb-1 font-sans text-xs font-medium text-silver">{car.marca}</div>
         <div className="font-head text-xl font-medium text-paper-text">{car.modelo}</div>

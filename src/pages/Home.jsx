@@ -4,6 +4,7 @@ import CarCard from "../components/CarCard.jsx";
 import BrandIcon from "../components/BrandIcon.jsx";
 import FuelIcon from "../components/FuelIcon.jsx";
 import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
+import CarCarousel from "../components/CarCarousel.jsx";
 import { CARS } from "../data/cars.js";
 
 const PRECO_MIN = 10000;
@@ -13,6 +14,7 @@ export default function Home() {
   const [marca, setMarca] = useState("Todas");
   const [combustivel, setCombustivel] = useState("Todos");
   const [precoMax, setPrecoMax] = useState(PRECO_MAX);
+  const [vista, setVista] = useState("grelha");
 
   const marcas = useMemo(() => ["Todas", ...new Set(CARS.map((c) => c.marca))], []);
   const combustiveis = useMemo(
@@ -74,9 +76,54 @@ export default function Home() {
           <h2 className="font-head text-2xl font-medium text-paper-text sm:text-3xl">
             Viaturas disponíveis
           </h2>
-          <span className="font-sans text-[13px] text-paper-muted">
-            {filtrados.length} de {CARS.length}
-          </span>
+          <div className="flex items-center gap-4">
+            <span className="font-sans text-[13px] text-paper-muted">
+              {filtrados.length} de {CARS.length}
+            </span>
+            <div className="flex border border-paper-line">
+              <button
+                onClick={() => setVista("grelha")}
+                aria-label="Ver em grelha"
+                aria-pressed={vista === "grelha"}
+                className={`flex h-8 w-9 items-center justify-center transition-colors ${
+                  vista === "grelha"
+                    ? "bg-ink text-white"
+                    : "text-paper-muted hover:text-paper-text"
+                }`}
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => setVista("carrossel")}
+                aria-label="Ver em carrossel"
+                aria-pressed={vista === "carrossel"}
+                className={`flex h-8 w-9 items-center justify-center border-l border-paper-line transition-colors ${
+                  vista === "carrossel"
+                    ? "bg-ink text-white"
+                    : "text-paper-muted hover:text-paper-text"
+                }`}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="7" y="5" width="10" height="14" rx="1" />
+                  <path d="M3 9v6M21 9v6" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="mb-9 flex flex-col gap-5">
@@ -143,11 +190,15 @@ export default function Home() {
         </div>
 
         {filtrados.length > 0 ? (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {filtrados.map((car) => (
-              <CarCard key={car.id} car={car} />
-            ))}
-          </div>
+          vista === "grelha" ? (
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {filtrados.map((car) => (
+                <CarCard key={car.id} car={car} />
+              ))}
+            </div>
+          ) : (
+            <CarCarousel cars={filtrados} />
+          )
         ) : (
           <p className="font-sans text-sm text-paper-muted">
             Não há viaturas que correspondam aos filtros selecionados.

@@ -1,5 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { getCarById } from "../data/cars.js";
+import CarImage from "../components/CarImage.jsx";
 
 const SPEC_ROWS = (car) => [
   ["Marca", car.marca],
@@ -31,32 +32,32 @@ export default function CarDetail() {
       </div>
 
       <section className="grid gap-10 px-6 py-10 sm:px-12 sm:py-14 lg:grid-cols-[1.4fr_1fr]">
-        {/* Galeria (placeholder) */}
+        {/* Galeria */}
         <div>
-          <div
-            className="flex aspect-[16/10] items-end justify-between p-6"
-            style={{
-              background:
-                "repeating-linear-gradient(135deg, #ececea, #ececea 10px, #e2e2df 10px, #e2e2df 20px)",
-            }}
+          <CarImage
+            car={car}
+            className="aspect-[16/10]"
+            overlayClassName="flex items-end justify-between p-6"
           >
             <span className="font-sans text-xs tracking-wide text-paper-muted">
               {car.marca} {car.modelo}
             </span>
             <span className="font-sans text-xs tracking-wide text-paper-muted">{car.ano}</span>
-          </div>
-          <div className="mt-2 grid grid-cols-3 gap-2">
-            {[1, 2, 3].map((n) => (
-              <div
-                key={n}
-                className="aspect-[4/3]"
-                style={{
-                  background:
-                    "repeating-linear-gradient(135deg, #ececea, #ececea 10px, #e2e2df 10px, #e2e2df 20px)",
-                }}
-              />
-            ))}
-          </div>
+          </CarImage>
+          {!car.imagem && (
+            <div className="mt-2 grid grid-cols-3 gap-2">
+              {[1, 2, 3].map((n) => (
+                <div
+                  key={n}
+                  className="aspect-[4/3]"
+                  style={{
+                    background:
+                      "repeating-linear-gradient(135deg, #ececea, #ececea 10px, #e2e2df 10px, #e2e2df 20px)",
+                  }}
+                />
+              ))}
+            </div>
+          )}
 
           <div className="mt-10">
             <h2 className="font-head text-xl font-medium text-paper-text">Descrição</h2>
