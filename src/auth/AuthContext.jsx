@@ -6,6 +6,7 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (!supabase) {
@@ -24,6 +25,26 @@ export function AuthProvider({ children }) {
 
     return () => listener.subscription.unsubscribe();
   }, []);
+
+  // Verifica se o utilizador atual é administrador (tabela profiles).
+  useEffect(() => {
+    if (!supabase || !user) {
+      setIsAdmin(false);
+      return;
+    }
+    let cancelado = false;
+    supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", user.id)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (!cancelado) setIsAdmin(data?.is_admin ?? false);
+      });
+    return () => {
+      cancelado = true;
+    };
+  }, [user]);
 
   async function signUp(email, password, nome) {
     if (!supabase) return { error: "Supabase não está configurado." };
@@ -47,7 +68,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, loading, isAdmin, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

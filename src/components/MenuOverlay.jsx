@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import { siInstagram, siWhatsapp } from "simple-icons";
 import SocialIcon from "./SocialIcon.jsx";
 import { INSTAGRAM_URL, WHATSAPP_URL } from "../data/social.js";
-import { CARS } from "../data/cars.js";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
+import { useCars } from "../cars/CarsContext.jsx";
 
 function MenuLink({ to, title, desc, onClose }) {
   return (
@@ -52,11 +52,12 @@ function Chip({ to, onClick, children }) {
 // marcas, sem sair do menu.
 function VeiculosSection({ onClose }) {
   const { t } = useLanguage();
+  const { cars } = useCars();
   const [open, setOpen] = useState(false);
 
   const marcas = useMemo(
-    () => [...new Set(CARS.map((c) => c.marca))].sort((a, b) => a.localeCompare(b)),
-    []
+    () => [...new Set(cars.map((c) => c.marca))].sort((a, b) => a.localeCompare(b)),
+    [cars]
   );
 
   return (

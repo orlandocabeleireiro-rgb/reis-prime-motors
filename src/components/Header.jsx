@@ -14,7 +14,7 @@ export default function Header() {
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const accountMenuRef = useRef(null);
   const { t } = useLanguage();
-  const { user, signOut } = useAuth();
+  const { user, isAdmin, signOut } = useAuth();
   const { pathname } = useLocation();
   const overlay = pathname === "/";
 
@@ -104,6 +104,15 @@ export default function Header() {
                   <div className="truncate border-b border-paper-line px-3.5 py-2 font-sans text-xs text-paper-muted">
                     {user.email}
                   </div>
+                  {isAdmin && (
+                    <NavLink
+                      to="/admin"
+                      onClick={() => setAccountMenuOpen(false)}
+                      className="block w-full px-3.5 py-2 text-left font-sans text-sm text-paper-text transition-colors hover:bg-paper"
+                    >
+                      Administração
+                    </NavLink>
+                  )}
                   <button
                     onClick={() => {
                       signOut();

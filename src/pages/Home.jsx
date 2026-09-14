@@ -4,10 +4,10 @@ import CarCard from "../components/CarCard.jsx";
 import CarSearch from "../components/CarSearch.jsx";
 import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
 import CarCarousel from "../components/CarCarousel.jsx";
-import { CARS } from "../data/cars.js";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 import { localizeCar } from "../i18n/localizeCar.js";
 import { useColumns } from "../hooks/useColumns.js";
+import { useCars } from "../cars/CarsContext.jsx";
 
 const ROWS_PER_PAGE = 3;
 
@@ -19,6 +19,7 @@ function scrollToResultados() {
 
 export default function Home() {
   const { t, lang } = useLanguage();
+  const { cars: CARS } = useCars();
   const [searchParams] = useSearchParams();
   const [marca, setMarca] = useState("Todas");
   const [modelo, setModelo] = useState("Todos");
@@ -46,15 +47,15 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-  const marcas = useMemo(() => [...new Set(CARS.map((c) => c.marca))], []);
-  const combustiveis = useMemo(() => [...new Set(CARS.map((c) => c.combustivel))], []);
+  const marcas = useMemo(() => [...new Set(CARS.map((c) => c.marca))], [CARS]);
+  const combustiveis = useMemo(() => [...new Set(CARS.map((c) => c.combustivel))], [CARS]);
   const modelos = useMemo(
     () => [
       ...new Set(
         CARS.filter((c) => marca === "Todas" || c.marca === marca).map((c) => c.modelo)
       ),
     ],
-    [marca]
+    [CARS, marca]
   );
 
   function handleSelectMarca(m, { scroll = true } = {}) {
@@ -73,7 +74,7 @@ export default function Home() {
       (a, b) => b.preco - a.preco
     );
     return [...forcados, ...resto].slice(0, 5).map((c) => localizeCar(c, lang));
-  }, [lang]);
+  }, [CARS, lang]);
 
   const filtrados = useMemo(() => {
     let list = CARS.filter(
@@ -89,7 +90,7 @@ export default function Home() {
       list = [...list].sort((a, b) => b.ano - a.ano || a.km - b.km);
     }
     return list.map((c) => localizeCar(c, lang));
-  }, [marca, modelo, combustivel, precoMax, lang, ordenar]);
+  }, [CARS, marca, modelo, combustivel, precoMax, lang, ordenar]);
 
   // Paginação da vista "carrossel" — sempre no máximo 3 filas por página.
   useEffect(() => {

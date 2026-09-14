@@ -1,9 +1,9 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { getCarById } from "../data/cars.js";
 import CarImage from "../components/CarImage.jsx";
 import SpecIcon from "../components/SpecIcon.jsx";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 import { localizeCar } from "../i18n/localizeCar.js";
+import { useCars } from "../cars/CarsContext.jsx";
 
 const SPEC_ROWS = (car, t) => [
   ["marca", t("home.marca"), car.marca],
@@ -21,10 +21,14 @@ const SPEC_ROWS = (car, t) => [
 export default function CarDetail() {
   const { id } = useParams();
   const { t, lang } = useLanguage();
-  const carRaw = getCarById(id);
+  const { cars, loading } = useCars();
+  const carRaw = cars.find((c) => c.id === Number(id));
   const car = carRaw ? localizeCar(carRaw, lang) : null;
 
   if (!car) {
+    // Enquanto as viaturas ainda estão a carregar, não se sabe ainda se
+    // este id existe — só redireciona para 404 depois de confirmado.
+    if (loading) return null;
     return <Navigate to="/404" replace />;
   }
 
