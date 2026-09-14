@@ -1,20 +1,28 @@
 import { useEffect, useState } from "react";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 
-// Ecrã de login/criar conta. Ainda sem sistema de autenticação ligado
-// (fica preparado para, no futuro, ligar a um backend real) — por agora
-// mostra o formulário e, ao submeter, avisa que a funcionalidade está
-// a ser preparada.
 export default function AccountModal({ open, onClose }) {
   const { t } = useLanguage();
+  const { signIn, signUp } = useAuth();
   const [mode, setMode] = useState("entrar"); // "entrar" | "criarConta"
-  const [submitted, setSubmitted] = useState(false);
+  const [confirmado, setConfirmado] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [erro, setErro] = useState(null);
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [palavraPasse, setPalavraPasse] = useState("");
 
   useEffect(() => {
     if (!open) return;
     document.body.style.overflow = "hidden";
-    setSubmitted(false);
+    setConfirmado(false);
+    setErro(null);
+    setLoading(false);
     setMode("entrar");
+    setNome("");
+    setEmail("");
+    setPalavraPasse("");
     return () => {
       document.body.style.overflow = "";
     };
@@ -31,9 +39,27 @@ export default function AccountModal({ open, onClose }) {
 
   if (!open) return null;
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setSubmitted(true);
+    setErro(null);
+    setLoading(true);
+
+    const { error } = mode === "entrar" ? await signIn(email, palavraPasse) : await signUp(email, palavraPasse, nome);
+
+    setLoading(false);
+
+    if (error) {
+      setErro(error);
+      return;
+    }
+
+    if (mode === "entrar") {
+      onClose();
+    } else {
+      // Por omissão o Supabase pede confirmação por email antes de deixar
+      // iniciar sessão.
+      setConfirmado(true);
+    }
   }
 
   return (
@@ -48,13 +74,19 @@ export default function AccountModal({ open, onClose }) {
         <div className="mb-5 flex items-center justify-between">
           <div className="flex gap-6 font-head text-lg font-medium">
             <button
-              onClick={() => setMode("entrar")}
+              onClick={() => {
+                setMode("entrar");
+                setErro(null);
+              }}
               className={mode === "entrar" ? "text-paper-text" : "text-paper-muted"}
             >
               {t("account.entrar")}
             </button>
             <button
-              onClick={() => setMode("criarConta")}
+              onClick={() => {
+                setMode("criarConta");
+                setErro(null);
+              }}
               className={mode === "criarConta" ? "text-paper-text" : "text-paper-muted"}
             >
               {t("account.criarConta")}
@@ -79,13 +111,13 @@ export default function AccountModal({ open, onClose }) {
           </button>
         </div>
 
-        {submitted ? (
+        {confirmado ? (
           <div className="py-4">
             <div className="font-head text-lg font-medium text-paper-text">
-              {t("account.emBreveTitulo")}
+              {t("account.confirmeTitulo")}
             </div>
             <p className="mt-2 font-sans text-sm leading-[1.6] text-paper-muted">
-              {t("account.emBreveTexto")}
+              {t("account.confirmeTexto")}
             </p>
             <button
               onClick={onClose}
@@ -104,6 +136,8 @@ export default function AccountModal({ open, onClose }) {
                 <input
                   required
                   type="text"
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
                   className="border border-paper-line bg-paper px-3.5 py-2.5 font-sans text-sm text-paper-text outline-none focus:border-paper-text"
                 />
               </label>
@@ -115,6 +149,8 @@ export default function AccountModal({ open, onClose }) {
               <input
                 required
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="border border-paper-line bg-paper px-3.5 py-2.5 font-sans text-sm text-paper-text outline-none focus:border-paper-text"
               />
             </label>
@@ -125,20 +161,29 @@ export default function AccountModal({ open, onClose }) {
               <input
                 required
                 type="password"
+                minLength={6}
+                value={palavraPasse}
+                onChange={(e) => setPalavraPasse(e.target.value)}
                 className="border border-paper-line bg-paper px-3.5 py-2.5 font-sans text-sm text-paper-text outline-none focus:border-paper-text"
               />
             </label>
 
+            {erro && <p className="font-sans text-xs text-red-600">{t("account.erroGenerico")}</p>}
+
             <button
               type="submit"
-              className="mt-1 bg-ink px-5 py-3 font-sans text-sm font-medium text-white transition-opacity hover:opacity-85"
+              disabled={loading}
+              className="mt-1 bg-ink px-5 py-3 font-sans text-sm font-medium text-white transition-opacity hover:opacity-85 disabled:opacity-60"
             >
               {mode === "entrar" ? t("account.entrarBotao") : t("account.criarContaBotao")}
             </button>
 
             <button
               type="button"
-              onClick={() => setMode(mode === "entrar" ? "criarConta" : "entrar")}
+              onClick={() => {
+                setMode(mode === "entrar" ? "criarConta" : "entrar");
+                setErro(null);
+              }}
               className="font-sans text-xs text-paper-muted underline-offset-2 hover:text-paper-text hover:underline"
             >
               {mode === "entrar" ? t("account.semConta") : t("account.jaTemConta")}

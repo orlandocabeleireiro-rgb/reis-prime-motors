@@ -47,9 +47,11 @@ const dict = {
       criarContaBotao: "Criar conta",
       semConta: "Ainda não tem conta?",
       jaTemConta: "Já tem conta?",
-      emBreveTitulo: "Brevemente disponível",
-      emBreveTexto:
-        "Esta funcionalidade está a ser preparada. Em breve vai poder criar conta e iniciar sessão.",
+      confirmeTitulo: "Confirme o seu email",
+      confirmeTexto:
+        "Enviámos um link de confirmação para o seu email. Clique nele para poder iniciar sessão.",
+      erroGenerico: "Não foi possível concluir. Verifique os dados e tente novamente.",
+      sair: "Sair",
       fechar: "Fechar",
     },
     home: {
@@ -209,8 +211,11 @@ const dict = {
       criarContaBotao: "Crear cuenta",
       semConta: "¿Aún no tiene cuenta?",
       jaTemConta: "¿Ya tiene cuenta?",
-      emBreveTitulo: "Disponible próximamente",
-      emBreveTexto: "Esta función se está preparando. Pronto podrá crear una cuenta e iniciar sesión.",
+      confirmeTitulo: "Confirme su correo",
+      confirmeTexto:
+        "Le hemos enviado un enlace de confirmación a su correo. Haga clic en él para poder iniciar sesión.",
+      erroGenerico: "No se pudo completar. Compruebe los datos e inténtelo de nuevo.",
+      sair: "Cerrar sesión",
       fechar: "Cerrar",
     },
     home: {
@@ -371,8 +376,10 @@ const dict = {
       criarContaBotao: "Sign up",
       semConta: "Don't have an account yet?",
       jaTemConta: "Already have an account?",
-      emBreveTitulo: "Coming soon",
-      emBreveTexto: "This feature is being built. You'll soon be able to create an account and log in.",
+      confirmeTitulo: "Confirm your email",
+      confirmeTexto: "We've sent a confirmation link to your email. Click it to be able to log in.",
+      erroGenerico: "Something went wrong. Check your details and try again.",
+      sair: "Log out",
       fechar: "Close",
     },
     home: {
@@ -531,9 +538,11 @@ const dict = {
       criarContaBotao: "Créer un compte",
       semConta: "Vous n'avez pas encore de compte ?",
       jaTemConta: "Vous avez déjà un compte ?",
-      emBreveTitulo: "Bientôt disponible",
-      emBreveTexto:
-        "Cette fonctionnalité est en préparation. Vous pourrez bientôt créer un compte et vous connecter.",
+      confirmeTitulo: "Confirmez votre e-mail",
+      confirmeTexto:
+        "Nous vous avons envoyé un lien de confirmation par e-mail. Cliquez dessus pour pouvoir vous connecter.",
+      erroGenerico: "Une erreur s'est produite. Vérifiez vos informations et réessayez.",
+      sair: "Se déconnecter",
       fechar: "Fermer",
     },
     home: {
