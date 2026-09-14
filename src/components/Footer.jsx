@@ -34,9 +34,7 @@ export default function Footer() {
         <div>
           <Link to="/" className="flex items-center gap-3">
             <img src="/reis-mark.png" alt="Reis Prime Motors" className="h-5 w-auto brightness-0 invert" />
-            <span className="font-head text-base tracking-wide text-cream">
-              REIS <span className="text-silver">PRIME MOTORS</span>
-            </span>
+            <span className="font-sans text-[13px] tracking-[0.3em] text-silver">PRIME MOTORS</span>
           </Link>
           <p className="mt-4 max-w-xs leading-[1.6] text-muted/90">{t("footer.tagline")}</p>
           <div className="mt-5 flex gap-3">
