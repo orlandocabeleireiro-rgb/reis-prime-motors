@@ -159,6 +159,9 @@ const dict = {
       novaMensagem: "Enviar nova mensagem",
     },
     footer: {
+      tagline: "Viaturas selecionadas com rigor, qualidade e confiança em cada escolha.",
+      navegacao: "Navegação",
+      contacto: "Contacto",
       morada: "Gondomar, Porto",
       verContactos: "Ver contactos e localização →",
       direitos: "Todos os direitos reservados.",
@@ -318,6 +321,9 @@ const dict = {
       novaMensagem: "Enviar nuevo mensaje",
     },
     footer: {
+      tagline: "Vehículos seleccionados con rigor, calidad y confianza en cada elección.",
+      navegacao: "Navegación",
+      contacto: "Contacto",
       morada: "Gondomar, Oporto",
       verContactos: "Ver contacto y ubicación →",
       direitos: "Todos los derechos reservados.",
@@ -475,6 +481,9 @@ const dict = {
       novaMensagem: "Send another message",
     },
     footer: {
+      tagline: "Cars selected with rigour, quality and confidence in every choice.",
+      navegacao: "Navigation",
+      contacto: "Contact",
       morada: "Gondomar, Porto",
       verContactos: "View contact & location →",
       direitos: "All rights reserved.",
@@ -635,6 +644,9 @@ const dict = {
       novaMensagem: "Envoyer un nouveau message",
     },
     footer: {
+      tagline: "Véhicules sélectionnés avec rigueur, qualité et confiance à chaque choix.",
+      navegacao: "Navigation",
+      contacto: "Contact",
       morada: "Gondomar, Porto",
       verContactos: "Voir contact et localisation →",
       direitos: "Tous droits réservés.",
