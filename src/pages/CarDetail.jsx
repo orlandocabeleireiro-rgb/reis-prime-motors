@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import CarImage from "../components/CarImage.jsx";
 import SpecIcon from "../components/SpecIcon.jsx";
@@ -24,6 +25,11 @@ export default function CarDetail() {
   const { cars, loading } = useCars();
   const carRaw = cars.find((c) => c.id === Number(id));
   const car = carRaw ? localizeCar(carRaw, lang) : null;
+  const [activeImg, setActiveImg] = useState(0);
+
+  useEffect(() => {
+    setActiveImg(0);
+  }, [id]);
 
   if (!car) {
     // Enquanto as viaturas ainda estão a carregar, não se sabe ainda se
@@ -31,6 +37,11 @@ export default function CarDetail() {
     if (loading) return null;
     return <Navigate to="/404" replace />;
   }
+
+  // Galeria: usa "imagens" (várias fotos, definidas na área de admin) e,
+  // para viaturas mais antigas que só têm uma foto, cai para "imagem".
+  const galeria = car.imagens?.length ? car.imagens : car.imagem ? [car.imagem] : [];
+  const carPrincipal = galeria.length ? { ...car, imagem: galeria[activeImg] ?? galeria[0] } : car;
 
   return (
     <>
@@ -44,7 +55,7 @@ export default function CarDetail() {
         {/* Galeria */}
         <div>
           <CarImage
-            car={car}
+            car={carPrincipal}
             className="aspect-[16/10]"
             overlayClassName="flex items-end justify-between p-6"
           >
@@ -53,19 +64,37 @@ export default function CarDetail() {
             </span>
             <span className="font-sans text-xs tracking-wide text-paper-muted">{car.ano}</span>
           </CarImage>
-          {!car.imagem && (
-            <div className="mt-2 grid grid-cols-3 gap-2">
-              {[1, 2, 3].map((n) => (
-                <div
-                  key={n}
-                  className="aspect-[4/3]"
-                  style={{
-                    background:
-                      "repeating-linear-gradient(135deg, #ececea, #ececea 10px, #e2e2df 10px, #e2e2df 20px)",
-                  }}
-                />
+          {galeria.length > 1 ? (
+            <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-5">
+              {galeria.map((url, i) => (
+                <button
+                  key={url + i}
+                  type="button"
+                  onClick={() => setActiveImg(i)}
+                  aria-label={`${t("car.verDetalhes")} ${i + 1}`}
+                  className={`aspect-[4/3] overflow-hidden border bg-white transition-colors ${
+                    i === activeImg ? "border-paper-text" : "border-paper-line hover:border-paper-muted"
+                  }`}
+                >
+                  <img src={url} alt="" className="h-full w-full object-contain p-1" />
+                </button>
               ))}
             </div>
+          ) : (
+            galeria.length === 0 && (
+              <div className="mt-2 grid grid-cols-3 gap-2">
+                {[1, 2, 3].map((n) => (
+                  <div
+                    key={n}
+                    className="aspect-[4/3]"
+                    style={{
+                      background:
+                        "repeating-linear-gradient(135deg, #ececea, #ececea 10px, #e2e2df 10px, #e2e2df 20px)",
+                    }}
+                  />
+                ))}
+              </div>
+            )
           )}
 
           <div className="mt-10">

@@ -79,15 +79,22 @@ export default function Admin() {
   }
 
   return (
-    <section className="px-6 py-10 sm:px-12 sm:py-14">
+    <section className="bg-paper px-6 py-10 sm:px-12 sm:py-14">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="font-head text-2xl font-medium text-paper-text sm:text-3xl">
-          Administração — Viaturas
-        </h1>
+        <div>
+          <h1 className="font-head text-2xl font-medium text-paper-text sm:text-3xl">
+            Administração
+          </h1>
+          <p className="mt-1 font-sans text-sm text-paper-muted">
+            {cars.length} viatura{cars.length === 1 ? "" : "s"} no total
+            {cars.some((c) => c.publicado === false) &&
+              ` · ${cars.filter((c) => c.publicado === false).length} em rascunho`}
+          </p>
+        </div>
         {!editing && (
           <button
             onClick={() => setEditing({})}
-            className="bg-ink px-5 py-2.5 font-sans text-sm font-medium text-white transition-opacity hover:opacity-85"
+            className="rounded-lg bg-ink px-5 py-2.5 font-sans text-sm font-medium text-white transition-opacity hover:opacity-85"
           >
             + Adicionar viatura
           </button>
@@ -107,33 +114,52 @@ export default function Admin() {
           {cars.map((car) => (
             <div
               key={car.id}
-              className="flex flex-wrap items-center justify-between gap-3 border border-paper-line bg-white p-4"
+              className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-paper-line bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
             >
               <div className="flex items-center gap-4">
                 {car.imagem ? (
-                  <img src={car.imagem} alt="" className="h-14 w-20 object-contain bg-paper" />
+                  <img
+                    src={car.imagem}
+                    alt=""
+                    className="h-16 w-24 rounded-lg bg-paper object-contain p-1"
+                  />
                 ) : (
-                  <div className="h-14 w-20 bg-paper" />
+                  <div className="h-16 w-24 rounded-lg bg-paper" />
                 )}
                 <div>
-                  <div className="font-sans text-xs text-silver">{car.marca}</div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-sans text-xs text-silver">{car.marca}</span>
+                    {car.publicado === false && (
+                      <span className="rounded bg-amber-50 px-1.5 py-0.5 font-sans text-[10px] font-medium text-amber-700">
+                        Rascunho
+                      </span>
+                    )}
+                  </div>
                   <div className="font-head text-base font-medium text-paper-text">{car.modelo}</div>
                   <div className="font-sans text-xs text-paper-muted">
                     {car.ano} · {car.preco?.toLocaleString("pt-PT")} €
                   </div>
                 </div>
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href={`/carros/${car.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-md border border-paper-line px-4 py-2 font-sans text-xs text-paper-text transition-colors hover:border-paper-text"
+                >
+                  Ver
+                </a>
                 <button
                   onClick={() => setEditing(car)}
-                  className="border border-paper-line px-4 py-2 font-sans text-xs text-paper-text transition-colors hover:border-paper-text"
+                  className="rounded-md border border-paper-line px-4 py-2 font-sans text-xs text-paper-text transition-colors hover:border-paper-text"
                 >
                   Editar
                 </button>
                 <button
                   onClick={() => handleDelete(car)}
                   disabled={apagando === car.id}
-                  className="border border-red-200 px-4 py-2 font-sans text-xs text-red-600 transition-colors hover:border-red-600 disabled:opacity-50"
+                  className="rounded-md border border-red-200 px-4 py-2 font-sans text-xs text-red-600 transition-colors hover:border-red-600 disabled:opacity-50"
                 >
                   {apagando === car.id ? "..." : "Remover"}
                 </button>
