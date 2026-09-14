@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import CarCard from "../components/CarCard.jsx";
 import CarSearch from "../components/CarSearch.jsx";
@@ -27,6 +27,7 @@ export default function Home() {
   const [vista, setVista] = useState("carrossel");
   const [page, setPage] = useState(0);
   const cols = useColumns();
+  const videoRef = useRef(null);
   const perPage = cols * ROWS_PER_PAGE;
 
   // Atalhos vindos do menu (ex.: /?marca=BMW, /?combustivel=Elétrico,
@@ -104,13 +105,21 @@ export default function Home() {
       {/* Hero — vídeo de fundo, cabeçalho sobreposto (ver Header.jsx) */}
       <section className="relative min-h-[640px] overflow-hidden bg-ink text-cream sm:min-h-[680px] lg:min-h-[760px]">
         <video
-          className="absolute inset-0 h-full w-full object-cover"
+          ref={videoRef}
+          className="pointer-events-none absolute inset-0 h-full w-full select-none object-cover"
           src="/video/hero-car.mp4"
           poster="/video/hero-car-poster.jpg"
           autoPlay
           muted
           loop
           playsInline
+          disablePictureInPicture
+          disableRemotePlayback
+          preload="auto"
+          tabIndex={-1}
+          aria-hidden="true"
+          onPause={() => videoRef.current?.play().catch(() => {})}
+          onContextMenu={(e) => e.preventDefault()}
         />
         {/* Sombra escura leve — só o suficiente para o texto se ler bem */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-black/55" />
