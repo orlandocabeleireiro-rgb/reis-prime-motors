@@ -236,9 +236,9 @@ export default function CarDetail() {
             <CardPreco car={car} t={t} />
           </div>
 
-          <div className="mt-10">
+          <div className="mt-10 border border-paper-line bg-white p-6 sm:p-8">
             <h2 className="font-head text-xl font-medium text-paper-text">{t("car.descricao")}</h2>
-            <p className="mt-3 max-w-2xl font-sans text-[15px] leading-[1.75] text-paper-muted">
+            <p className="mt-4 font-sans text-base leading-[1.9] text-paper-muted">
               {car.descricao}
             </p>
           </div>
