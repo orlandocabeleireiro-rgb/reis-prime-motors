@@ -5,6 +5,8 @@ import SpecIcon from "../components/SpecIcon.jsx";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 import { localizeCar } from "../i18n/localizeCar.js";
 import { useCars } from "../cars/CarsContext.jsx";
+import { agruparDestaques } from "../data/destaqueCategorias.js";
+import DestaqueCategoriaIcon from "../components/DestaqueCategoriaIcon.jsx";
 
 const SPEC_ROWS = (car, t) => [
   ["marca", t("home.marca"), car.marca],
@@ -56,6 +58,9 @@ export default function CarDetail() {
   // para viaturas mais antigas que só têm uma foto, cai para "imagem".
   const galeria = car.imagens?.length ? car.imagens : car.imagem ? [car.imagem] : [];
   const carPrincipal = galeria.length ? { ...car, imagem: galeria[activeImg] ?? galeria[0] } : car;
+
+  // Destaques agrupados por categoria (Segurança, Faróis, Bancos, ...)
+  const gruposDestaques = agruparDestaques(carRaw?.destaques, car.destaques, lang);
 
   const linkPartilha = typeof window !== "undefined" ? window.location.href : "";
   const textoPartilha = `${car.marca} ${car.modelo} — ${car.preco.toLocaleString("pt-PT")} € · Reis Prime Motors`;
@@ -143,46 +148,38 @@ export default function CarDetail() {
             </p>
           </div>
 
-          <div className="mt-10">
-            <h2 className="flex items-center gap-2 font-head text-xl font-medium text-paper-text">
-              <svg
-                viewBox="0 0 24 24"
-                className="h-5 w-5 text-silver"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="9" />
-                <path d="m8 12.5 2.5 2.5L16 9.5" />
-              </svg>
-              {t("car.destaques")}
-            </h2>
-            <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-              {car.destaques.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-2.5 border border-paper-line bg-white px-3.5 py-3 font-sans text-[13px] text-paper-text"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-4 w-4 flex-shrink-0 text-silver"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
+          {gruposDestaques.map((grupo) => (
+            <div key={grupo.id} className="mt-10">
+              <h2 className="flex items-center gap-2.5 font-head text-xl font-medium text-paper-text">
+                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-paper text-silver">
+                  <DestaqueCategoriaIcon icone={grupo.icone} />
+                </span>
+                {grupo.label}
+              </h2>
+              <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                {grupo.items.map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-2.5 rounded-lg border border-paper-line bg-white px-3.5 py-3 font-sans text-[13px] text-paper-text"
                   >
-                    <path d="M5 12.5 9.5 17 19 7" />
-                  </svg>
-                  {item}
-                </div>
-              ))}
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4 flex-shrink-0 text-silver"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12.5 9.5 17 19 7" />
+                    </svg>
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
 
         {/* Ficha técnica + CTA */}
