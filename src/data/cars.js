@@ -15,7 +15,7 @@ export const CARS = [
     potencia: 190,
     consumo: "4,5 l/100km",
     descricao:
-      "BMW Série 3 320d em excelente estado de conservação, revisões em dia e histórico completo. Equipado com pack desportivo, jantes de liga leve e interior em pele. O motor a diesel de 190 cv garante um equilíbrio muito bom entre desempenho e eficiência. Entrega-se pronta a conduzir, com a documentação e a inspeção periódica atualizadas.",
+      "BMW Série 3 320d em excelente estado de conservação, revisões em dia e histórico completo. Equipado com pack desportivo, jantes de liga leve e interior em pele. O motor a diesel de 190 cv garante um equilíbrio muito bom entre desempenho e eficiência no dia a dia. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante, sem intervalos por cumprir. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto e de um bom acabamento. Disponibilizamos toda a informação necessária sobre esta viatura para que possa tomar a melhor decisão com confiança.",
     destaques: [
       "Um único proprietário",
       "Histórico de manutenção completo",
@@ -46,7 +46,7 @@ export const CARS = [
     potencia: 116,
     consumo: "4,1 l/100km",
     descricao:
-      "Mercedes-Benz Classe A elegante e económico, ideal para cidade e viagens longas. Interior digital com o sistema MBUX e assistente de condução. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais.",
+      "Mercedes-Benz Classe A elegante e económico, ideal para cidade e viagens longas. Interior digital com o sistema MBUX e assistente de condução. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas pela autoestrada. Entrega-se pronta a conduzir, com a documentação em ordem e a inspeção periódica atualizada. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente, sem qualquer compromisso. Na Reis Prime Motors valorizamos a transparência: qualquer dúvida sobre o histórico ou o estado da viatura, esclarecemos com todo o gosto.",
     destaques: [
       "Sistema multimédia MBUX",
       "Faróis LED de alto desempenho",
@@ -77,7 +77,7 @@ export const CARS = [
     potencia: 163,
     consumo: "4,3 l/100km",
     descricao:
-      "Audi A4 Avant com muito baixa quilometragem, praticamente como novo. Carroçaria familiar com grande capacidade de bagageira, ideal para quem procura espaço e conforto. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto.",
+      "Audi A4 Avant com muito baixa quilometragem, praticamente como novo. Carroçaria familiar com grande capacidade de bagageira, ideal para quem procura espaço e conforto. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante, sem intervalos por cumprir. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais de segurança e mecânica. Disponibilizamos toda a informação necessária sobre esta viatura para que possa tomar a melhor decisão com confiança. Com 21 000 km percorridos, mantém-se em muito bom estado geral de conservação, tanto ao nível da carroçaria como do interior.",
     destaques: [
       "Baixa quilometragem",
       "Ainda em garantia de fábrica",
@@ -108,7 +108,7 @@ export const CARS = [
     potencia: 130,
     consumo: "5,8 l/100km",
     descricao:
-      "Volkswagen Golf, um dos modelos mais fiáveis e procurados do mercado. Motor a gasolina eficiente, ótimo para uso diário. Entrega-se pronta a conduzir, com a documentação e a inspeção periódica atualizadas. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente.",
+      "Volkswagen Golf, um dos modelos mais fiáveis e procurados do mercado. Motor a gasolina eficiente, ótimo para uso diário. Entrega-se pronta a conduzir, com a documentação em ordem e a inspeção periódica atualizada. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto e de um bom acabamento. Na Reis Prime Motors valorizamos a transparência: qualquer dúvida sobre o histórico ou o estado da viatura, esclarecemos com todo o gosto. O motor a gasolina de 130 cv garante um equilíbrio muito bom entre desempenho e eficiência no dia a dia.",
     destaques: [
       "Ecrã tátil de 8\"",
       "Sensores de chuva e luzes automáticas",
@@ -139,7 +139,7 @@ export const CARS = [
     potencia: 100,
     consumo: "5,2 l/100km",
     descricao:
-      "Renault Clio praticamente novo, com quilometragem muito reduzida. Excelente opção de primeiro carro ou uso urbano. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais. Com 8000 km percorridos, mantém-se em muito bom estado geral de conservação.",
+      "Renault Clio praticamente novo, com quilometragem muito reduzida. Excelente opção de primeiro carro ou uso urbano. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais de segurança e mecânica. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente, sem qualquer compromisso. Com 8000 km percorridos, mantém-se em muito bom estado geral de conservação, tanto ao nível da carroçaria como do interior. A caixa manual torna a condução mais descontraída, tanto na cidade como em viagens mais longas pela autoestrada.",
     destaques: [
       "Quase sem uso — 8.000 km",
       "Ainda em garantia de fábrica",
@@ -170,7 +170,7 @@ export const CARS = [
     potencia: 130,
     consumo: "4,7 l/100km",
     descricao:
-      "Peugeot 3008 SUV, espaçoso e confortável, com o premiado i-Cockpit. Ótima opção para famílias que procuram mais espaço sem abdicar de conforto. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto. O motor a diesel de 130 cv garante um equilíbrio muito bom entre desempenho e eficiência.",
+      "Peugeot 3008 SUV, espaçoso e confortável, com o premiado i-Cockpit. Ótima opção para famílias que procuram mais espaço sem abdicar de conforto. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto e de um bom acabamento. Disponibilizamos toda a informação necessária sobre esta viatura para que possa tomar a melhor decisão com confiança. O motor a diesel de 130 cv garante um equilíbrio muito bom entre desempenho e eficiência no dia a dia. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante, sem intervalos por cumprir.",
     destaques: [
       "SUV com bom espaço interior",
       "i-Cockpit digital",
@@ -201,7 +201,7 @@ export const CARS = [
     potencia: 351,
     consumo: "14,9 kWh/100km",
     descricao:
-      "Tesla Model 3 com tração integral e autonomia elevada. Piloto automático de série, atualizações por Over-The-Air e acesso à rede de carregadores Supercharger. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas.",
+      "Tesla Model 3 com tração integral e autonomia elevada. Piloto automático de série, atualizações por Over-The-Air e acesso à rede de carregadores Supercharger. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente, sem qualquer compromisso. Na Reis Prime Motors valorizamos a transparência: qualquer dúvida sobre o histórico ou o estado da viatura, esclarecemos com todo o gosto. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas pela autoestrada. Entrega-se pronta a conduzir, com a documentação em ordem e a inspeção periódica atualizada.",
     destaques: [
       "Tração integral (dupla motor)",
       "Piloto automático incluído",
@@ -233,7 +233,7 @@ export const CARS = [
     potencia: 385,
     consumo: "9,0 l/100km",
     descricao:
-      "Porsche 911 Carrera, um ícone desportivo mantido com o maior cuidado. Revisões sempre em concessionário oficial, sem registo de acidentes. Com 38 000 km percorridos, mantém-se em muito bom estado geral de conservação. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante.",
+      "Porsche 911 Carrera, um ícone desportivo mantido com o maior cuidado. Revisões sempre em concessionário oficial, sem registo de acidentes. Disponibilizamos toda a informação necessária sobre esta viatura para que possa tomar a melhor decisão com confiança. Com 38 000 km percorridos, mantém-se em muito bom estado geral de conservação, tanto ao nível da carroçaria como do interior. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante, sem intervalos por cumprir. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais de segurança e mecânica.",
     destaques: [
       "Histórico 100% em concessionário oficial",
       "Bancos desportivos em pele",
@@ -264,7 +264,7 @@ export const CARS = [
     potencia: 125,
     consumo: "5,4 l/100km",
     descricao:
-      "Ford Focus equilibrado entre conforto e economia, motor 1.0 EcoBoost eficiente. Excelente opção para condução diária em cidade e autoestrada. O motor a gasolina de 125 cv garante um equilíbrio muito bom entre desempenho e eficiência. Entrega-se pronta a conduzir, com a documentação e a inspeção periódica atualizadas.",
+      "Ford Focus equilibrado entre conforto e economia, motor 1.0 EcoBoost eficiente. Excelente opção para condução diária em cidade e autoestrada. Na Reis Prime Motors valorizamos a transparência: qualquer dúvida sobre o histórico ou o estado da viatura, esclarecemos com todo o gosto. O motor a gasolina de 125 cv garante um equilíbrio muito bom entre desempenho e eficiência no dia a dia. Entrega-se pronta a conduzir, com a documentação em ordem e a inspeção periódica atualizada. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto e de um bom acabamento.",
     destaques: [
       "Motor EcoBoost premiado internacionalmente",
       "Ford SYNC com Apple CarPlay/Android Auto",
@@ -295,7 +295,7 @@ export const CARS = [
     potencia: 122,
     consumo: "4,0 l/100km",
     descricao:
-      "Toyota Corolla Híbrido, fiabilidade lendária e consumo muito reduzido em cidade. Ideal para quem procura baixos custos de manutenção a longo prazo. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais.",
+      "Toyota Corolla Híbrido, fiabilidade lendária e consumo muito reduzido em cidade. Ideal para quem procura baixos custos de manutenção a longo prazo. Com 30 000 km percorridos, mantém-se em muito bom estado geral de conservação, tanto ao nível da carroçaria como do interior. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas pela autoestrada. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais de segurança e mecânica. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente, sem qualquer compromisso.",
     destaques: [
       "Tecnologia híbrida Toyota consagrada",
       "Toyota Safety Sense (assistentes de condução)",
@@ -326,7 +326,7 @@ export const CARS = [
     potencia: 70,
     consumo: "4,3 l/100km",
     descricao:
-      "Fiat 500 com estilo inconfundível, ideal para cidade. Muito baixa quilometragem e consumo reduzido graças ao sistema mild-hybrid. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto.",
+      "Fiat 500 com estilo inconfundível, ideal para cidade. Muito baixa quilometragem e consumo reduzido graças ao sistema mild-hybrid. O motor a gasolina de 70 cv garante um equilíbrio muito bom entre desempenho e eficiência no dia a dia. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante, sem intervalos por cumprir. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto e de um bom acabamento. Disponibilizamos toda a informação necessária sobre esta viatura para que possa tomar a melhor decisão com confiança.",
     destaques: [
       "Design icónico italiano",
       "Sistema mild-hybrid",
@@ -357,7 +357,7 @@ export const CARS = [
     potencia: 140,
     consumo: "6,1 l/100km",
     descricao:
-      "Nissan Qashqai, um dos SUV compactos mais vendidos na Europa. Espaço, visibilidade e conforto para toda a família. Entrega-se pronta a conduzir, com a documentação e a inspeção periódica atualizadas. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente.",
+      "Nissan Qashqai, um dos SUV compactos mais vendidos na Europa. Espaço, visibilidade e conforto para toda a família. A caixa manual torna a condução mais descontraída, tanto na cidade como em viagens mais longas pela autoestrada. Entrega-se pronta a conduzir, com a documentação em ordem e a inspeção periódica atualizada. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente, sem qualquer compromisso. Na Reis Prime Motors valorizamos a transparência: qualquer dúvida sobre o histórico ou o estado da viatura, esclarecemos com todo o gosto.",
     destaques: [
       "ProPILOT (assistente de condução semiautónomo)",
       "Câmara 360º",
@@ -388,7 +388,7 @@ export const CARS = [
     potencia: 136,
     consumo: "5,3 l/100km",
     descricao:
-      "Kia Sportage com design moderno e generoso espaço interior. Beneficia ainda da garantia de fábrica Kia, uma das mais longas do mercado. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais. Com 28 000 km percorridos, mantém-se em muito bom estado geral de conservação.",
+      "Kia Sportage com design moderno e generoso espaço interior. Beneficia ainda da garantia de fábrica Kia, uma das mais longas do mercado. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante, sem intervalos por cumprir. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais de segurança e mecânica. Disponibilizamos toda a informação necessária sobre esta viatura para que possa tomar a melhor decisão com confiança. Com 28 000 km percorridos, mantém-se em muito bom estado geral de conservação, tanto ao nível da carroçaria como do interior.",
     destaques: [
       "Ainda coberto pela garantia de fábrica Kia",
       "Painel digital totalmente digital",
@@ -419,7 +419,7 @@ export const CARS = [
     potencia: 83,
     consumo: "5,2 l/100km",
     descricao:
-      "Citroën C3 compacto e confortável, com suspensões com Amortecedores de Curso Progressivo para maior conforto em piso irregular. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto. O motor a gasolina de 83 cv garante um equilíbrio muito bom entre desempenho e eficiência.",
+      "Citroën C3 compacto e confortável, com suspensões com Amortecedores de Curso Progressivo para maior conforto em piso irregular. Entrega-se pronta a conduzir, com a documentação em ordem e a inspeção periódica atualizada. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto e de um bom acabamento. Na Reis Prime Motors valorizamos a transparência: qualquer dúvida sobre o histórico ou o estado da viatura, esclarecemos com todo o gosto. O motor a gasolina de 83 cv garante um equilíbrio muito bom entre desempenho e eficiência no dia a dia.",
     destaques: [
       "Suspensão Progressive Hydraulic Cushions",
       "Bancos Advanced Comfort",
@@ -450,7 +450,7 @@ export const CARS = [
     potencia: 204,
     consumo: "15,2 kWh/100km",
     descricao:
-      "BYD Atto 3, SUV elétrico com boa autonomia e um interior muito bem equipado. Garantia de fábrica alargada na bateria. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas.",
+      "BYD Atto 3, SUV elétrico com boa autonomia e um interior muito bem equipado. Garantia de fábrica alargada na bateria. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais de segurança e mecânica. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente, sem qualquer compromisso. Com 15 000 km percorridos, mantém-se em muito bom estado geral de conservação, tanto ao nível da carroçaria como do interior. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas pela autoestrada.",
     destaques: [
       "Autonomia superior a 400 km",
       "Garantia da bateria alargada",
@@ -481,7 +481,7 @@ export const CARS = [
     potencia: 197,
     consumo: "5,3 l/100km",
     descricao:
-      "Volvo XC60, referência em segurança e conforto. Interior escandinavo de grande qualidade e sistema mild-hybrid para maior eficiência. Com 42 000 km percorridos, mantém-se em muito bom estado geral de conservação. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante.",
+      "Volvo XC60, referência em segurança e conforto. Interior escandinavo de grande qualidade e sistema mild-hybrid para maior eficiência. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto e de um bom acabamento. Disponibilizamos toda a informação necessária sobre esta viatura para que possa tomar a melhor decisão com confiança. O motor a diesel de 197 cv garante um equilíbrio muito bom entre desempenho e eficiência no dia a dia. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante, sem intervalos por cumprir.",
     destaques: [
       "Pack de segurança Volvo completo",
       "Bancos em couro com aquecimento",
@@ -512,7 +512,7 @@ export const CARS = [
     potencia: 408,
     consumo: "17,8 kWh/100km",
     descricao:
-      "Polestar 2, elétrico de alta performance com tração integral e acabamento minimalista escandinavo. Sistema de infoentretenimento Android nativo. O motor elétrico de 408 cv garante um equilíbrio muito bom entre desempenho e eficiência. Entrega-se pronta a conduzir, com a documentação e a inspeção periódica atualizadas.",
+      "Polestar 2, elétrico de alta performance com tração integral e acabamento minimalista escandinavo. Sistema de infoentretenimento Android nativo. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente, sem qualquer compromisso. Na Reis Prime Motors valorizamos a transparência: qualquer dúvida sobre o histórico ou o estado da viatura, esclarecemos com todo o gosto. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas pela autoestrada. Entrega-se pronta a conduzir, com a documentação em ordem e a inspeção periódica atualizada.",
     destaques: [
       "Tração integral com dupla motor",
       "Android Automotive nativo com Google integrado",
@@ -543,7 +543,7 @@ export const CARS = [
     potencia: 178,
     consumo: "6,1 l/100km",
     descricao:
-      "Mini Cooper S, estilo britânico inconfundível com condução ágil e divertida. Baixa quilometragem e muito bem equipado. A caixa manual torna a condução mais descontraída, tanto na cidade como em viagens mais longas. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais.",
+      "Mini Cooper S, estilo britânico inconfundível com condução ágil e divertida. Baixa quilometragem e muito bem equipado. Disponibilizamos toda a informação necessária sobre esta viatura para que possa tomar a melhor decisão com confiança. Com 18 000 km percorridos, mantém-se em muito bom estado geral de conservação, tanto ao nível da carroçaria como do interior. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante, sem intervalos por cumprir. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais de segurança e mecânica.",
     destaques: [
       "Motor 2.0 turbo de 178 cv",
       "Jantes exclusivas de 17\"",
@@ -574,7 +574,7 @@ export const CARS = [
     potencia: 204,
     consumo: "6,0 l/100km",
     descricao:
-      "Jaguar F-Pace, SUV desportivo com o ADN de condução típico da marca britânica. Interior em pele e acabamentos de grande qualidade. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto.",
+      "Jaguar F-Pace, SUV desportivo com o ADN de condução típico da marca britânica. Interior em pele e acabamentos de grande qualidade. Na Reis Prime Motors valorizamos a transparência: qualquer dúvida sobre o histórico ou o estado da viatura, esclarecemos com todo o gosto. O motor a diesel de 204 cv garante um equilíbrio muito bom entre desempenho e eficiência no dia a dia. Entrega-se pronta a conduzir, com a documentação em ordem e a inspeção periódica atualizada. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto e de um bom acabamento.",
     destaques: [
       "Interior em pele premium",
       "Sistema de som Meridian",
@@ -605,7 +605,7 @@ export const CARS = [
     potencia: 450,
     consumo: "12,8 l/100km",
     descricao:
-      "Ford Mustang GT com o icónico motor V8 5.0 atmosférico. Um clássico americano moderno, mantido com muito cuidado. Entrega-se pronta a conduzir, com a documentação e a inspeção periódica atualizadas. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente.",
+      "Ford Mustang GT com o icónico motor V8 5.0 atmosférico. Um clássico americano moderno, mantido com muito cuidado. Com 25 000 km percorridos, mantém-se em muito bom estado geral de conservação, tanto ao nível da carroçaria como do interior. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas pela autoestrada. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais de segurança e mecânica. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente, sem qualquer compromisso.",
     destaques: [
       "Motor V8 5.0 atmosférico",
       "Escape ativo desportivo",
@@ -636,7 +636,7 @@ export const CARS = [
     potencia: 245,
     consumo: "7,8 l/100km",
     descricao:
-      "Cupra Formentor VZ, SUV coupé desportivo com carácter próprio. Tração integral e travões Brembo para uma condução muito envolvente. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais. Com 22 000 km percorridos, mantém-se em muito bom estado geral de conservação.",
+      "Cupra Formentor VZ, SUV coupé desportivo com carácter próprio. Tração integral e travões Brembo para uma condução muito envolvente. O motor a gasolina de 245 cv garante um equilíbrio muito bom entre desempenho e eficiência no dia a dia. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante, sem intervalos por cumprir. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto e de um bom acabamento. Disponibilizamos toda a informação necessária sobre esta viatura para que possa tomar a melhor decisão com confiança.",
     destaques: [
       "Tração integral 4Drive",
       "Travões Brembo",
@@ -667,7 +667,7 @@ export const CARS = [
     potencia: 306,
     consumo: "1,7 l/100km",
     descricao:
-      "Mercedes-Benz E 300 de, híbrido plug-in a gasóleo que junta a eficiência do elétrico em cidade com a autonomia do diesel em viagem. Conforto e tecnologia ao nível do que é esperado da Classe E. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto. O motor híbrido a gasóleo de 306 cv garante um equilíbrio muito bom entre desempenho e eficiência.",
+      "Mercedes-Benz E 300 de, híbrido plug-in a gasóleo que junta a eficiência do elétrico em cidade com a autonomia do diesel em viagem. Conforto e tecnologia ao nível do que é esperado da Classe E. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas pela autoestrada. Entrega-se pronta a conduzir, com a documentação em ordem e a inspeção periódica atualizada. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente, sem qualquer compromisso. Na Reis Prime Motors valorizamos a transparência: qualquer dúvida sobre o histórico ou o estado da viatura, esclarecemos com todo o gosto.",
     destaques: [
       "Híbrido plug-in a gasóleo (motor + elétrico)",
       "Até 25 km só em modo elétrico",
@@ -699,7 +699,7 @@ export const CARS = [
     potencia: 435,
     consumo: "20,2 kWh/100km",
     descricao:
-      "Porsche Taycan 4S, o desportivo 100% elétrico da Porsche. Praticamente novo, junta a aceleração instantânea de um elétrico ao ADN de condução Porsche. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto.",
+      "Porsche Taycan 4S, o desportivo 100% elétrico da Porsche. Praticamente novo, junta a aceleração instantânea de um elétrico ao ADN de condução Porsche. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente, sem qualquer compromisso. Na Reis Prime Motors valorizamos a transparência: qualquer dúvida sobre o histórico ou o estado da viatura, esclarecemos com todo o gosto. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas pela autoestrada. Entrega-se pronta a conduzir, com a documentação em ordem e a inspeção periódica atualizada.",
     destaques: [
       "Tração integral com dupla motor",
       "Arquitetura de 800V — carregamento ultrarrápido",
@@ -731,7 +731,7 @@ export const CARS = [
     potencia: 385,
     consumo: "10,5 l/100km",
     descricao:
-      "Porsche 911 Carrera 4S, praticamente novo, com tração integral. O ícone desportivo da Porsche na sua versão mais equilibrada entre desempenho e dia-a-dia. Entrega-se pronta a conduzir, com a documentação e a inspeção periódica atualizadas. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente.",
+      "Porsche 911 Carrera 4S, praticamente novo, com tração integral. O ícone desportivo da Porsche na sua versão mais equilibrada entre desempenho e dia-a-dia. Disponibilizamos toda a informação necessária sobre esta viatura para que possa tomar a melhor decisão com confiança. Com 5000 km percorridos, mantém-se em muito bom estado geral de conservação, tanto ao nível da carroçaria como do interior. Todas as revisões foram feitas de acordo com o plano de manutenção recomendado pelo fabricante, sem intervalos por cumprir. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais de segurança e mecânica.",
     destaques: [
       "Tração integral (Carrera 4)",
       "Suspensão desportiva PASM",
@@ -763,7 +763,7 @@ export const CARS = [
     potencia: 269,
     consumo: "17,5 kWh/100km",
     descricao:
-      "Ford Mustang Mach-E, SUV 100% elétrico com o ADN desportivo Mustang. Praticamente novo, junta espaço e tecnologia a um design arrojado. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais. Com 9000 km percorridos, mantém-se em muito bom estado geral de conservação.",
+      "Ford Mustang Mach-E, SUV 100% elétrico com o ADN desportivo Mustang. Praticamente novo, junta espaço e tecnologia a um design arrojado. Na Reis Prime Motors valorizamos a transparência: qualquer dúvida sobre o histórico ou o estado da viatura, esclarecemos com todo o gosto. O motor elétrico de 269 cv garante um equilíbrio muito bom entre desempenho e eficiência no dia a dia. Entrega-se pronta a conduzir, com a documentação em ordem e a inspeção periódica atualizada. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto e de um bom acabamento.",
     destaques: [
       "Motor elétrico eficiente",
       "Ecrã central de 15,5\" na vertical",
@@ -795,7 +795,7 @@ export const CARS = [
     potencia: 283,
     consumo: "13,9 kWh/100km",
     descricao:
-      "Tesla Model 3 no design mais recente (\"Highland\"), praticamente novo. Interior renovado, mais silencioso e com acabamentos revistos. Uma excelente opção para quem procura fiabilidade no dia a dia sem abdicar de conforto. O motor elétrico de 283 cv garante um equilíbrio muito bom entre desempenho e eficiência.",
+      "Tesla Model 3 no design mais recente (\"Highland\"), praticamente novo. Interior renovado, mais silencioso e com acabamentos revistos. Com 3000 km percorridos, mantém-se em muito bom estado geral de conservação, tanto ao nível da carroçaria como do interior. A caixa automática torna a condução mais descontraída, tanto na cidade como em viagens mais longas pela autoestrada. Antes de entrar no nosso stand, esta viatura passou por uma inspeção cuidada em todos os pontos essenciais de segurança e mecânica. Estamos disponíveis para agendar uma visita e experimentar esta viatura pessoalmente, sem qualquer compromisso.",
     destaques: [
       "Design exterior e interior renovados",
       "Ecrã traseiro para os passageiros",
