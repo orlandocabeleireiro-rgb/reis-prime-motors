@@ -8,33 +8,14 @@ import { useCars } from "../cars/CarsContext.jsx";
 import { agruparDestaques } from "../data/destaqueCategorias.js";
 import DestaqueCategoriaIcon from "../components/DestaqueCategoriaIcon.jsx";
 
-const SPEC_ROWS = (car, t) => [
-  ["marca", t("home.marca"), car.marca],
-  ["modelo", t("home.modelo"), car.modelo],
-  ["ano", t("car.ano"), car.ano],
-  ["km", t("car.km"), `${car.km.toLocaleString("pt-PT")} km`],
-  ["combustivel", t("home.combustivel"), car.combustivel],
-  ["transmissao", t("car.transmissao"), car.transmissao],
-  ["potencia", t("car.potencia"), `${car.potencia} cv`],
-  ["consumo", t("car.consumo"), car.consumo],
-  ["cor", t("car.cor"), car.cor],
-  ["portas", t("car.portas"), car.portas],
-];
-
-export default function CarDetail() {
-  const { id } = useParams();
-  const { t, lang } = useLanguage();
-  const { cars, loading } = useCars();
-  const carRaw = cars.find((c) => c.id === Number(id));
-  const car = carRaw ? localizeCar(carRaw, lang) : null;
-  const [activeImg, setActiveImg] = useState(0);
+// Cartão de marca/modelo/preço + botões de contacto, partilha e impressão.
+// Aparece duas vezes na página (ver CarDetail): logo a seguir à foto no
+// telemóvel, e na coluna direita a partir do "lg" — por isso tem o seu
+// próprio estado (não é partilhado entre as duas instâncias).
+function CardPreco({ car, t }) {
   const [menuPartilhaAberto, setMenuPartilhaAberto] = useState(false);
   const [linkCopiado, setLinkCopiado] = useState(false);
   const partilhaRef = useRef(null);
-
-  useEffect(() => {
-    setActiveImg(0);
-  }, [id]);
 
   useEffect(() => {
     if (!menuPartilhaAberto) return;
@@ -46,21 +27,6 @@ export default function CarDetail() {
     document.addEventListener("mousedown", onClickOutside);
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, [menuPartilhaAberto]);
-
-  if (!car) {
-    // Enquanto as viaturas ainda estão a carregar, não se sabe ainda se
-    // este id existe — só redireciona para 404 depois de confirmado.
-    if (loading) return null;
-    return <Navigate to="/404" replace />;
-  }
-
-  // Galeria: usa "imagens" (várias fotos, definidas na área de admin) e,
-  // para viaturas mais antigas que só têm uma foto, cai para "imagem".
-  const galeria = car.imagens?.length ? car.imagens : car.imagem ? [car.imagem] : [];
-  const carPrincipal = galeria.length ? { ...car, imagem: galeria[activeImg] ?? galeria[0] } : car;
-
-  // Destaques agrupados por categoria (Segurança, Faróis, Bancos, ...)
-  const gruposDestaques = agruparDestaques(carRaw?.destaques, car.destaques, lang);
 
   const linkPartilha = typeof window !== "undefined" ? window.location.href : "";
   const textoPartilha = `${car.marca} ${car.modelo} — ${car.preco.toLocaleString("pt-PT")} € · Reis Prime Motors`;
@@ -86,6 +52,128 @@ export default function CarDetail() {
       // clipboard indisponível — ignora silenciosamente
     }
   }
+
+  return (
+    <div className="border border-paper-line bg-white p-6">
+      <div className="font-sans text-xs font-medium tracking-wide text-silver">{car.marca}</div>
+      <h1 className="mt-1 font-head text-2xl font-medium text-paper-text">{car.modelo}</h1>
+      <div className="mt-4 font-head text-3xl text-paper-text">
+        {car.preco.toLocaleString("pt-PT")} €
+      </div>
+
+      <div className="mt-6 flex flex-col gap-2.5">
+        <Link
+          to="/contactos"
+          className="bg-ink px-5 py-3.5 text-center font-sans text-sm font-medium text-white transition-opacity hover:opacity-85"
+        >
+          {t("car.interesse")}
+        </Link>
+        <a
+          href="tel:+351220000000"
+          className="border border-paper-line px-5 py-3.5 text-center font-sans text-sm text-paper-text transition-colors hover:border-paper-text"
+        >
+          {t("car.ligar")}: 220 000 000
+        </a>
+      </div>
+
+      <div className="relative mt-4 grid grid-cols-2 gap-2.5 border-t border-paper-line pt-4" ref={partilhaRef}>
+        <button
+          type="button"
+          onClick={() => window.print()}
+          className="flex items-center justify-center gap-2 border border-paper-line px-3 py-2.5 font-sans text-xs text-paper-muted transition-colors hover:border-paper-text hover:text-paper-text"
+        >
+          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M6 14h12v7H6v-7z" />
+          </svg>
+          {t("car.imprimirFicha")}
+        </button>
+
+        <button
+          type="button"
+          onClick={partilhar}
+          aria-expanded={menuPartilhaAberto}
+          className="flex items-center justify-center gap-2 border border-paper-line px-3 py-2.5 font-sans text-xs text-paper-muted transition-colors hover:border-paper-text hover:text-paper-text"
+        >
+          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="18" cy="5" r="2.5" />
+            <circle cx="6" cy="12" r="2.5" />
+            <circle cx="18" cy="19" r="2.5" />
+            <path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4" />
+          </svg>
+          {t("car.partilhar")}
+        </button>
+
+        {menuPartilhaAberto && (
+          <div className="absolute right-0 top-full z-20 mt-2 w-full min-w-[13rem] border border-paper-line bg-white py-1.5 shadow-lg">
+            <a
+              href={`https://wa.me/?text=${encodeURIComponent(`${textoPartilha} ${linkPartilha}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-3.5 py-2 text-left font-sans text-sm text-paper-text transition-colors hover:bg-paper"
+            >
+              WhatsApp
+            </a>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(linkPartilha)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-3.5 py-2 text-left font-sans text-sm text-paper-text transition-colors hover:bg-paper"
+            >
+              Facebook
+            </a>
+            <button
+              type="button"
+              onClick={copiarLink}
+              className="block w-full px-3.5 py-2 text-left font-sans text-sm text-paper-text transition-colors hover:bg-paper"
+            >
+              {linkCopiado ? t("car.linkCopiado") : "Copiar link"}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const SPEC_ROWS = (car, t) => [
+  ["marca", t("home.marca"), car.marca],
+  ["modelo", t("home.modelo"), car.modelo],
+  ["ano", t("car.ano"), car.ano],
+  ["km", t("car.km"), `${car.km.toLocaleString("pt-PT")} km`],
+  ["combustivel", t("home.combustivel"), car.combustivel],
+  ["transmissao", t("car.transmissao"), car.transmissao],
+  ["potencia", t("car.potencia"), `${car.potencia} cv`],
+  ["consumo", t("car.consumo"), car.consumo],
+  ["cor", t("car.cor"), car.cor],
+  ["portas", t("car.portas"), car.portas],
+];
+
+export default function CarDetail() {
+  const { id } = useParams();
+  const { t, lang } = useLanguage();
+  const { cars, loading } = useCars();
+  const carRaw = cars.find((c) => c.id === Number(id));
+  const car = carRaw ? localizeCar(carRaw, lang) : null;
+  const [activeImg, setActiveImg] = useState(0);
+
+  useEffect(() => {
+    setActiveImg(0);
+  }, [id]);
+
+  if (!car) {
+    // Enquanto as viaturas ainda estão a carregar, não se sabe ainda se
+    // este id existe — só redireciona para 404 depois de confirmado.
+    if (loading) return null;
+    return <Navigate to="/404" replace />;
+  }
+
+  // Galeria: usa "imagens" (várias fotos, definidas na área de admin) e,
+  // para viaturas mais antigas que só têm uma foto, cai para "imagem".
+  const galeria = car.imagens?.length ? car.imagens : car.imagem ? [car.imagem] : [];
+  const carPrincipal = galeria.length ? { ...car, imagem: galeria[activeImg] ?? galeria[0] } : car;
+
+  // Destaques agrupados por categoria (Segurança, Faróis, Bancos, ...)
+  const gruposDestaques = agruparDestaques(carRaw?.destaques, car.destaques, lang);
 
   return (
     <>
@@ -141,6 +229,13 @@ export default function CarDetail() {
             )
           )}
 
+          {/* No telemóvel (coluna única) o preço e o título aparecem logo
+              a seguir à foto — a versão da coluna direita (visível só a
+              partir do "lg") fica escondida aqui para não duplicar. */}
+          <div className="mt-6 lg:hidden">
+            <CardPreco car={car} t={t} />
+          </div>
+
           <div className="mt-10">
             <h2 className="font-head text-xl font-medium text-paper-text">{t("car.descricao")}</h2>
             <p className="mt-3 max-w-2xl font-sans text-[15px] leading-[1.75] text-paper-muted">
@@ -184,85 +279,8 @@ export default function CarDetail() {
 
         {/* Ficha técnica + CTA */}
         <div className="lg:self-start">
-          <div className="border border-paper-line bg-white p-6">
-            <div className="font-sans text-xs font-medium tracking-wide text-silver">
-              {car.marca}
-            </div>
-            <h1 className="mt-1 font-head text-2xl font-medium text-paper-text">{car.modelo}</h1>
-            <div className="mt-4 font-head text-3xl text-paper-text">
-              {car.preco.toLocaleString("pt-PT")} €
-            </div>
-
-            <div className="mt-6 flex flex-col gap-2.5">
-              <Link
-                to="/contactos"
-                className="bg-ink px-5 py-3.5 text-center font-sans text-sm font-medium text-white transition-opacity hover:opacity-85"
-              >
-                {t("car.interesse")}
-              </Link>
-              <a
-                href="tel:+351220000000"
-                className="border border-paper-line px-5 py-3.5 text-center font-sans text-sm text-paper-text transition-colors hover:border-paper-text"
-              >
-                {t("car.ligar")}: 220 000 000
-              </a>
-            </div>
-
-            <div className="relative mt-4 grid grid-cols-2 gap-2.5 border-t border-paper-line pt-4" ref={partilhaRef}>
-              <button
-                type="button"
-                onClick={() => window.print()}
-                className="flex items-center justify-center gap-2 border border-paper-line px-3 py-2.5 font-sans text-xs text-paper-muted transition-colors hover:border-paper-text hover:text-paper-text"
-              >
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M6 14h12v7H6v-7z" />
-                </svg>
-                {t("car.imprimirFicha")}
-              </button>
-
-              <button
-                type="button"
-                onClick={partilhar}
-                aria-expanded={menuPartilhaAberto}
-                className="flex items-center justify-center gap-2 border border-paper-line px-3 py-2.5 font-sans text-xs text-paper-muted transition-colors hover:border-paper-text hover:text-paper-text"
-              >
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <circle cx="18" cy="5" r="2.5" />
-                  <circle cx="6" cy="12" r="2.5" />
-                  <circle cx="18" cy="19" r="2.5" />
-                  <path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4" />
-                </svg>
-                {t("car.partilhar")}
-              </button>
-
-              {menuPartilhaAberto && (
-                <div className="absolute right-0 top-full z-20 mt-2 w-full min-w-[13rem] border border-paper-line bg-white py-1.5 shadow-lg">
-                  <a
-                    href={`https://wa.me/?text=${encodeURIComponent(`${textoPartilha} ${linkPartilha}`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block px-3.5 py-2 text-left font-sans text-sm text-paper-text transition-colors hover:bg-paper"
-                  >
-                    WhatsApp
-                  </a>
-                  <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(linkPartilha)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block px-3.5 py-2 text-left font-sans text-sm text-paper-text transition-colors hover:bg-paper"
-                  >
-                    Facebook
-                  </a>
-                  <button
-                    type="button"
-                    onClick={copiarLink}
-                    className="block w-full px-3.5 py-2 text-left font-sans text-sm text-paper-text transition-colors hover:bg-paper"
-                  >
-                    {linkCopiado ? t("car.linkCopiado") : "Copiar link"}
-                  </button>
-                </div>
-              )}
-            </div>
+          <div className="hidden lg:block">
+            <CardPreco car={car} t={t} />
           </div>
 
           <div className="mt-6 border border-line bg-ink p-6">
