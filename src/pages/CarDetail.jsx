@@ -242,39 +242,6 @@ export default function CarDetail() {
               {car.descricao}
             </p>
           </div>
-
-          {gruposDestaques.map((grupo) => (
-            <div key={grupo.id} className="mt-10">
-              <h2 className="flex items-center gap-2.5 font-head text-xl font-medium text-paper-text">
-                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-paper text-silver">
-                  <DestaqueCategoriaIcon icone={grupo.icone} />
-                </span>
-                {grupo.label}
-              </h2>
-              <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                {grupo.items.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-2.5 rounded-lg border border-paper-line bg-white px-3.5 py-3 font-sans text-[13px] text-paper-text"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-4 w-4 flex-shrink-0 text-silver"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 12.5 9.5 17 19 7" />
-                    </svg>
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
         </div>
 
         {/* Ficha técnica + CTA */}
@@ -302,6 +269,45 @@ export default function CarDetail() {
           </div>
         </div>
       </section>
+
+      {/* Equipamento por categoria — a toda a largura, por baixo da foto
+          e da ficha técnica (não fica espremido ao lado da caixa preta). */}
+      {gruposDestaques.length > 0 && (
+        <section className="border-t border-paper-line px-6 py-10 print:hidden sm:px-12 sm:py-14">
+          {gruposDestaques.map((grupo) => (
+            <div key={grupo.id} className="mt-10 first:mt-0">
+              <h2 className="flex items-center gap-2.5 font-head text-xl font-medium text-paper-text">
+                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-paper text-silver">
+                  <DestaqueCategoriaIcon icone={grupo.icone} />
+                </span>
+                {grupo.label}
+              </h2>
+              <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {grupo.items.map((item) => (
+                  <div
+                    key={item}
+                    className="flex items-center gap-2.5 rounded-lg border border-paper-line bg-white px-3.5 py-3 font-sans text-[13px] text-paper-text"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4 flex-shrink-0 text-silver"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12.5 9.5 17 19 7" />
+                    </svg>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
 
       {/* Ficha para impressão / PDF — só aparece ao imprimir (botão "Imprimir
           ficha" chama window.print(); o resto da página fica escondido). */}
