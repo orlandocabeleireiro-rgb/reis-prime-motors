@@ -29,7 +29,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-ink px-6 py-14 font-sans text-sm text-muted sm:px-12 sm:py-16">
+    <footer className="bg-ink px-6 py-14 font-sans text-sm text-muted print:hidden sm:px-12 sm:py-16">
       <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr] lg:gap-8">
         <div>
           <Link to="/" className="flex items-center gap-3">

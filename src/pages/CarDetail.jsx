@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import CarImage from "../components/CarImage.jsx";
 import SpecIcon from "../components/SpecIcon.jsx";
@@ -26,10 +26,24 @@ export default function CarDetail() {
   const carRaw = cars.find((c) => c.id === Number(id));
   const car = carRaw ? localizeCar(carRaw, lang) : null;
   const [activeImg, setActiveImg] = useState(0);
+  const [menuPartilhaAberto, setMenuPartilhaAberto] = useState(false);
+  const [linkCopiado, setLinkCopiado] = useState(false);
+  const partilhaRef = useRef(null);
 
   useEffect(() => {
     setActiveImg(0);
   }, [id]);
+
+  useEffect(() => {
+    if (!menuPartilhaAberto) return;
+    function onClickOutside(e) {
+      if (partilhaRef.current && !partilhaRef.current.contains(e.target)) {
+        setMenuPartilhaAberto(false);
+      }
+    }
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, [menuPartilhaAberto]);
 
   if (!car) {
     // Enquanto as viaturas ainda estão a carregar, não se sabe ainda se
@@ -43,15 +57,40 @@ export default function CarDetail() {
   const galeria = car.imagens?.length ? car.imagens : car.imagem ? [car.imagem] : [];
   const carPrincipal = galeria.length ? { ...car, imagem: galeria[activeImg] ?? galeria[0] } : car;
 
+  const linkPartilha = typeof window !== "undefined" ? window.location.href : "";
+  const textoPartilha = `${car.marca} ${car.modelo} — ${car.preco.toLocaleString("pt-PT")} € · Reis Prime Motors`;
+
+  async function partilhar() {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: textoPartilha, url: linkPartilha });
+      } catch {
+        // utilizador cancelou a partilha — não é um erro
+      }
+      return;
+    }
+    setMenuPartilhaAberto((o) => !o);
+  }
+
+  async function copiarLink() {
+    try {
+      await navigator.clipboard.writeText(linkPartilha);
+      setLinkCopiado(true);
+      setTimeout(() => setLinkCopiado(false), 2000);
+    } catch {
+      // clipboard indisponível — ignora silenciosamente
+    }
+  }
+
   return (
     <>
-      <div className="border-b border-paper-line bg-white px-6 py-4 sm:px-12">
+      <div className="border-b border-paper-line bg-white px-6 py-4 print:hidden sm:px-12">
         <Link to="/" className="font-sans text-sm text-paper-muted hover:text-paper-text">
           {t("car.voltar")}
         </Link>
       </div>
 
-      <section className="grid gap-10 px-6 py-10 sm:px-12 sm:py-14 lg:grid-cols-[1.4fr_1fr]">
+      <section className="grid gap-10 px-6 py-10 print:hidden sm:px-12 sm:py-14 lg:grid-cols-[1.4fr_1fr]">
         {/* Galeria */}
         <div>
           <CarImage
@@ -171,6 +210,62 @@ export default function CarDetail() {
                 {t("car.ligar")}: 220 000 000
               </a>
             </div>
+
+            <div className="relative mt-4 grid grid-cols-2 gap-2.5 border-t border-paper-line pt-4" ref={partilhaRef}>
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="flex items-center justify-center gap-2 border border-paper-line px-3 py-2.5 font-sans text-xs text-paper-muted transition-colors hover:border-paper-text hover:text-paper-text"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M6 14h12v7H6v-7z" />
+                </svg>
+                {t("car.imprimirFicha")}
+              </button>
+
+              <button
+                type="button"
+                onClick={partilhar}
+                aria-expanded={menuPartilhaAberto}
+                className="flex items-center justify-center gap-2 border border-paper-line px-3 py-2.5 font-sans text-xs text-paper-muted transition-colors hover:border-paper-text hover:text-paper-text"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="18" cy="5" r="2.5" />
+                  <circle cx="6" cy="12" r="2.5" />
+                  <circle cx="18" cy="19" r="2.5" />
+                  <path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4" />
+                </svg>
+                {t("car.partilhar")}
+              </button>
+
+              {menuPartilhaAberto && (
+                <div className="absolute right-0 top-full z-20 mt-2 w-full min-w-[13rem] border border-paper-line bg-white py-1.5 shadow-lg">
+                  <a
+                    href={`https://wa.me/?text=${encodeURIComponent(`${textoPartilha} ${linkPartilha}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-3.5 py-2 text-left font-sans text-sm text-paper-text transition-colors hover:bg-paper"
+                  >
+                    WhatsApp
+                  </a>
+                  <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(linkPartilha)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-3.5 py-2 text-left font-sans text-sm text-paper-text transition-colors hover:bg-paper"
+                  >
+                    Facebook
+                  </a>
+                  <button
+                    type="button"
+                    onClick={copiarLink}
+                    className="block w-full px-3.5 py-2 text-left font-sans text-sm text-paper-text transition-colors hover:bg-paper"
+                  >
+                    {linkCopiado ? t("car.linkCopiado") : "Copiar link"}
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="mt-6 border border-line bg-ink p-6">
@@ -192,6 +287,62 @@ export default function CarDetail() {
           </div>
         </div>
       </section>
+
+      {/* Ficha para impressão / PDF — só aparece ao imprimir (botão "Imprimir
+          ficha" chama window.print(); o resto da página fica escondido). */}
+      <div className="hidden print:block">
+        <div className="flex items-center justify-between border-b border-black/20 pb-4">
+          <img src="/reis-mark.png" alt="Reis Prime Motors" className="h-8 w-auto" />
+          <div className="text-right">
+            <div className="text-lg font-semibold">
+              {car.marca} {car.modelo}
+            </div>
+            <div className="text-2xl font-bold">{car.preco.toLocaleString("pt-PT")} €</div>
+          </div>
+        </div>
+
+        {galeria.length > 0 && (
+          <div className="mt-5 grid grid-cols-3 gap-2">
+            {galeria.slice(0, 3).map((url, i) => (
+              <img
+                key={url + i}
+                src={url}
+                alt=""
+                className="aspect-[4/3] w-full border border-black/10 object-contain"
+              />
+            ))}
+          </div>
+        )}
+
+        <div className="mt-6 grid grid-cols-2 gap-x-8 gap-y-1.5 text-sm">
+          {SPEC_ROWS(car, t).map(([specKey, label, val]) => (
+            <div key={specKey} className="flex justify-between border-b border-black/10 py-1.5">
+              <span className="text-black/60">{label}</span>
+              <span className="font-medium">{val}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6">
+          <div className="text-xs font-semibold uppercase tracking-wide text-black/60">
+            {t("car.descricao")}
+          </div>
+          <p className="mt-1 text-sm leading-relaxed">{car.descricao}</p>
+        </div>
+
+        {car.destaques?.length > 0 && (
+          <div className="mt-6">
+            <div className="text-xs font-semibold uppercase tracking-wide text-black/60">
+              {t("car.destaques")}
+            </div>
+            <p className="mt-1 text-sm leading-relaxed">{car.destaques.join(" · ")}</p>
+          </div>
+        )}
+
+        <div className="mt-10 border-t border-black/20 pt-4 text-xs text-black/60">
+          Reis Prime Motors · geral@reisprimemotors.pt · 220 000 000
+        </div>
+      </div>
     </>
   );
 }

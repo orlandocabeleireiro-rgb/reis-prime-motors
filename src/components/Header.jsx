@@ -34,7 +34,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`flex items-center justify-between px-6 py-5 sm:px-12 ${
+        className={`flex items-center justify-between px-6 py-5 print:hidden sm:px-12 ${
           overlay
             ? "absolute inset-x-0 top-0 z-30 border-b-0 bg-transparent"
             : "relative border-b border-paper-line bg-white"
