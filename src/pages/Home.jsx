@@ -4,7 +4,6 @@ import CarCard from "../components/CarCard.jsx";
 import CarSearch from "../components/CarSearch.jsx";
 import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
 import CarCarousel from "../components/CarCarousel.jsx";
-import Intro from "../components/Intro.jsx";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 import { localizeCar } from "../i18n/localizeCar.js";
 import { useColumns } from "../hooks/useColumns.js";
@@ -104,9 +103,6 @@ export default function Home() {
 
   return (
     <>
-      {/* Intro cinematográfica (1.ª visita da sessão) */}
-      <Intro />
-
       {/* Hero — vídeo de fundo, cabeçalho sobreposto (ver Header.jsx) */}
       <section className="relative min-h-[640px] overflow-hidden bg-ink text-cream sm:min-h-[680px] lg:min-h-[760px]">
         <video

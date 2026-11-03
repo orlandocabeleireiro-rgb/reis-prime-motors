@@ -57,7 +57,6 @@ const dict = {
     home: {
       heroTitle1: "Escolhidos com rigor.",
       heroTitle2: "Conduzidos com confiança.",
-      introSkip: "Saltar",
       heroText:
         "Selecionamos cada viatura com atenção ao detalhe, procurando qualidade, transparência e confiança em cada escolha.",
       ctaVer: "Ver todas as viaturas",
@@ -225,7 +224,6 @@ const dict = {
     home: {
       heroTitle1: "Elegidos con rigor.",
       heroTitle2: "Conducidos con confianza.",
-      introSkip: "Saltar",
       heroText:
         "Seleccionamos cada vehículo con atención al detalle, buscando calidad, transparencia y confianza en cada elección.",
       ctaVer: "Ver todos los vehículos",
@@ -393,7 +391,6 @@ const dict = {
     home: {
       heroTitle1: "Chosen with rigour.",
       heroTitle2: "Driven with confidence.",
-      introSkip: "Skip",
       heroText:
         "We select every car with attention to detail, aiming for quality, transparency and confidence in every choice.",
       ctaVer: "View all cars",
@@ -560,7 +557,6 @@ const dict = {
     home: {
       heroTitle1: "Choisis avec rigueur.",
       heroTitle2: "Conduits en toute confiance.",
-      introSkip: "Passer",
       heroText:
         "Nous sélectionnons chaque véhicule avec attention, en recherchant qualité, transparence et confiance à chaque choix.",
       ctaVer: "Voir tous les véhicules",
